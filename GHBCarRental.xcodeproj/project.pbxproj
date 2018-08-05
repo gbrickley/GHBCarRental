@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		03B091E0211793E300F07463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091DF211793E300F07463 /* AppDelegate.swift */; };
-		03B091E2211793E300F07463 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091E1211793E300F07463 /* ViewController.swift */; };
 		03B091E5211793E300F07463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E3211793E300F07463 /* Main.storyboard */; };
 		03B091E7211793E500F07463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E6211793E500F07463 /* Assets.xcassets */; };
 		03B091EA211793E500F07463 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E8211793E500F07463 /* LaunchScreen.storyboard */; };
@@ -36,7 +35,6 @@
 /* Begin PBXFileReference section */
 		03B091DC211793E300F07463 /* GHBCarRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHBCarRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B091DF211793E300F07463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		03B091E1211793E300F07463 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03B091E4211793E300F07463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03B091E6211793E500F07463 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03B091E9211793E500F07463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -97,11 +95,12 @@
 		03B091DE211793E300F07463 /* GHBCarRental */ = {
 			isa = PBXGroup;
 			children = (
+				03B0920D211793EF00F07463 /* Model */,
+				03B0920E211793F700F07463 /* View */,
+				03B0920F211793FB00F07463 /* Controller */,
+				03B092112117943900F07463 /* Assets */,
+				03B092102117942700F07463 /* Utilities */,
 				03B091DF211793E300F07463 /* AppDelegate.swift */,
-				03B091E1211793E300F07463 /* ViewController.swift */,
-				03B091E3211793E300F07463 /* Main.storyboard */,
-				03B091E6211793E500F07463 /* Assets.xcassets */,
-				03B091E8211793E500F07463 /* LaunchScreen.storyboard */,
 				03B091EB211793E500F07463 /* Info.plist */,
 			);
 			path = GHBCarRental;
@@ -123,6 +122,44 @@
 				03B09201211793E500F07463 /* Info.plist */,
 			);
 			path = GHBCarRentalUITests;
+			sourceTree = "<group>";
+		};
+		03B0920D211793EF00F07463 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		03B0920E211793F700F07463 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03B091E3211793E300F07463 /* Main.storyboard */,
+				03B091E8211793E500F07463 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		03B0920F211793FB00F07463 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		03B092102117942700F07463 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		03B092112117943900F07463 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				03B091E6211793E500F07463 /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +293,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03B091E2211793E300F07463 /* ViewController.swift in Sources */,
 				03B091E0211793E300F07463 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
