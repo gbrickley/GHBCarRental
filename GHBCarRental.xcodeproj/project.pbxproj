@@ -13,6 +13,21 @@
 		03B091EA211793E500F07463 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E8211793E500F07463 /* LaunchScreen.storyboard */; };
 		03B091F5211793E500F07463 /* GHBCarRentalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091F4211793E500F07463 /* GHBCarRentalTests.swift */; };
 		03B09200211793E500F07463 /* GHBCarRentalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091FF211793E500F07463 /* GHBCarRentalUITests.swift */; };
+		03B092CF21179A4100F07463 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092CE21179A4100F07463 /* SearchViewController.swift */; };
+		03B092D121179B7000F07463 /* RentalSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092D021179B7000F07463 /* RentalSearchRequest.swift */; };
+		03B092D321179E2700F07463 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092D221179E2700F07463 /* Constants.swift */; };
+		03B092D92117B26C00F07463 /* RentalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092D82117B26C00F07463 /* RentalProvider.swift */; };
+		03B092DB2117B8BB00F07463 /* RentalCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092DA2117B8BB00F07463 /* RentalCar.swift */; };
+		03B092DE2117C11200F07463 /* CarRentalGeosearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092DD2117C11200F07463 /* CarRentalGeosearch.swift */; };
+		03B092E02117C14B00F07463 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092DF2117C14B00F07463 /* Globals.swift */; };
+		03B092E22117E3AB00F07463 /* UnitConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092E12117E3AB00F07463 /* UnitConversions.swift */; };
+		03B092E52117E52B00F07463 /* Date+Amadeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092E42117E52B00F07463 /* Date+Amadeus.swift */; };
+		03B092E72117EA0900F07463 /* UnitConversionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092E62117EA0900F07463 /* UnitConversionsTests.swift */; };
+		03B092E92117ED2B00F07463 /* DateFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092E82117ED2B00F07463 /* DateFormatterTests.swift */; };
+		03B092EB2118363200F07463 /* RentalProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092EA2118363200F07463 /* RentalProviderTests.swift */; };
+		9433FFA3992AEE64DEE68A2A /* Pods_GHBCarRentalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AD5FA7A694ABC1415FE280 /* Pods_GHBCarRentalTests.framework */; };
+		B6C03A525AA353ECA517123F /* Pods_GHBCarRentalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E7BE7D5ED126F8BB1B8CF9 /* Pods_GHBCarRentalUITests.framework */; };
+		E580F9EDF9F8541FD5856603 /* Pods_GHBCarRental.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2755CB2B2985EC70ED42A9D /* Pods_GHBCarRental.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0301E4BAB03C2F17E7F54723 /* Pods-GHBCarRentalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.release.xcconfig"; sourceTree = "<group>"; };
+		03608E954B89AD657E065482 /* Pods-GHBCarRentalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		03B091DC211793E300F07463 /* GHBCarRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHBCarRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B091DF211793E300F07463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03B091E4211793E300F07463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,6 +62,25 @@
 		03B091FB211793E500F07463 /* GHBCarRentalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GHBCarRentalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B091FF211793E500F07463 /* GHBCarRentalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHBCarRentalUITests.swift; sourceTree = "<group>"; };
 		03B09201211793E500F07463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03B092CE21179A4100F07463 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		03B092D021179B7000F07463 /* RentalSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalSearchRequest.swift; sourceTree = "<group>"; };
+		03B092D221179E2700F07463 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		03B092D82117B26C00F07463 /* RentalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalProvider.swift; sourceTree = "<group>"; };
+		03B092DA2117B8BB00F07463 /* RentalCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCar.swift; sourceTree = "<group>"; };
+		03B092DD2117C11200F07463 /* CarRentalGeosearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarRentalGeosearch.swift; sourceTree = "<group>"; };
+		03B092DF2117C14B00F07463 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		03B092E12117E3AB00F07463 /* UnitConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversions.swift; sourceTree = "<group>"; };
+		03B092E42117E52B00F07463 /* Date+Amadeus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Amadeus.swift"; sourceTree = "<group>"; };
+		03B092E62117EA0900F07463 /* UnitConversionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversionsTests.swift; sourceTree = "<group>"; };
+		03B092E82117ED2B00F07463 /* DateFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterTests.swift; sourceTree = "<group>"; };
+		03B092EA2118363200F07463 /* RentalProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalProviderTests.swift; sourceTree = "<group>"; };
+		04E7BE7D5ED126F8BB1B8CF9 /* Pods_GHBCarRentalUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GHBCarRentalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		900C4FBF65F7347BD0CA701D /* Pods-GHBCarRentalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalTests/Pods-GHBCarRentalTests.release.xcconfig"; sourceTree = "<group>"; };
+		97545AA00AE28307CC473C02 /* Pods-GHBCarRentalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalTests/Pods-GHBCarRentalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B0AD5FA7A694ABC1415FE280 /* Pods_GHBCarRentalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GHBCarRentalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAA731E1AC15E95C8AB0C7A2 /* Pods-GHBCarRental.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRental.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRental/Pods-GHBCarRental.debug.xcconfig"; sourceTree = "<group>"; };
+		D91029DE41D286A938DE7288 /* Pods-GHBCarRental.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRental.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRental/Pods-GHBCarRental.release.xcconfig"; sourceTree = "<group>"; };
+		E2755CB2B2985EC70ED42A9D /* Pods_GHBCarRental.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GHBCarRental.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E580F9EDF9F8541FD5856603 /* Pods_GHBCarRental.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9433FFA3992AEE64DEE68A2A /* Pods_GHBCarRentalTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6C03A525AA353ECA517123F /* Pods_GHBCarRentalUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +118,8 @@
 				03B091F3211793E500F07463 /* GHBCarRentalTests */,
 				03B091FE211793E500F07463 /* GHBCarRentalUITests */,
 				03B091DD211793E300F07463 /* Products */,
+				476E21B53E68882144DDDD0B /* Pods */,
+				FA265E7E384D9BE3E8A10396 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +141,8 @@
 				03B0920F211793FB00F07463 /* Controller */,
 				03B092112117943900F07463 /* Assets */,
 				03B092102117942700F07463 /* Utilities */,
+				03B092D62117B18900F07463 /* Amadeus API */,
+				03B092D221179E2700F07463 /* Constants.swift */,
 				03B091DF211793E300F07463 /* AppDelegate.swift */,
 				03B091EB211793E500F07463 /* Info.plist */,
 			);
@@ -109,6 +152,9 @@
 		03B091F3211793E500F07463 /* GHBCarRentalTests */ = {
 			isa = PBXGroup;
 			children = (
+				03B092EA2118363200F07463 /* RentalProviderTests.swift */,
+				03B092E62117EA0900F07463 /* UnitConversionsTests.swift */,
+				03B092E82117ED2B00F07463 /* DateFormatterTests.swift */,
 				03B091F4211793E500F07463 /* GHBCarRentalTests.swift */,
 				03B091F6211793E500F07463 /* Info.plist */,
 			);
@@ -143,6 +189,7 @@
 		03B0920F211793FB00F07463 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				03B092CE21179A4100F07463 /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -162,6 +209,67 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		03B092D62117B18900F07463 /* Amadeus API */ = {
+			isa = PBXGroup;
+			children = (
+				03B092D021179B7000F07463 /* RentalSearchRequest.swift */,
+				03B092D72117B19500F07463 /* Model */,
+				03B092E32117E3C500F07463 /* Requests */,
+				03B092DC2117C0CC00F07463 /* Utilities */,
+			);
+			path = "Amadeus API";
+			sourceTree = "<group>";
+		};
+		03B092D72117B19500F07463 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				03B092DA2117B8BB00F07463 /* RentalCar.swift */,
+				03B092D82117B26C00F07463 /* RentalProvider.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		03B092DC2117C0CC00F07463 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				03B092DF2117C14B00F07463 /* Globals.swift */,
+				03B092E12117E3AB00F07463 /* UnitConversions.swift */,
+				03B092E42117E52B00F07463 /* Date+Amadeus.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		03B092E32117E3C500F07463 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				03B092DD2117C11200F07463 /* CarRentalGeosearch.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		476E21B53E68882144DDDD0B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CAA731E1AC15E95C8AB0C7A2 /* Pods-GHBCarRental.debug.xcconfig */,
+				D91029DE41D286A938DE7288 /* Pods-GHBCarRental.release.xcconfig */,
+				97545AA00AE28307CC473C02 /* Pods-GHBCarRentalTests.debug.xcconfig */,
+				900C4FBF65F7347BD0CA701D /* Pods-GHBCarRentalTests.release.xcconfig */,
+				03608E954B89AD657E065482 /* Pods-GHBCarRentalUITests.debug.xcconfig */,
+				0301E4BAB03C2F17E7F54723 /* Pods-GHBCarRentalUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FA265E7E384D9BE3E8A10396 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2755CB2B2985EC70ED42A9D /* Pods_GHBCarRental.framework */,
+				B0AD5FA7A694ABC1415FE280 /* Pods_GHBCarRentalTests.framework */,
+				04E7BE7D5ED126F8BB1B8CF9 /* Pods_GHBCarRentalUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,9 +277,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03B09204211793E500F07463 /* Build configuration list for PBXNativeTarget "GHBCarRental" */;
 			buildPhases = (
+				81607FC0630B86757196CB82 /* [CP] Check Pods Manifest.lock */,
 				03B091D8211793E300F07463 /* Sources */,
 				03B091D9211793E300F07463 /* Frameworks */,
 				03B091DA211793E300F07463 /* Resources */,
+				8BD3E07784979A343A8103A8 /* [CP] Embed Pods Frameworks */,
+				07BF52D7C0B7FB743EF84B2B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -186,9 +297,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03B09207211793E500F07463 /* Build configuration list for PBXNativeTarget "GHBCarRentalTests" */;
 			buildPhases = (
+				B538077711E6A7BD8299B307 /* [CP] Check Pods Manifest.lock */,
 				03B091EC211793E500F07463 /* Sources */,
 				03B091ED211793E500F07463 /* Frameworks */,
 				03B091EE211793E500F07463 /* Resources */,
+				77053C0A47BC7CE44E46060A /* [CP] Embed Pods Frameworks */,
+				172F4D25C5835DA316B9017A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -204,9 +318,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03B0920A211793E500F07463 /* Build configuration list for PBXNativeTarget "GHBCarRentalUITests" */;
 			buildPhases = (
+				12DC4C5C12F43F405687C316 /* [CP] Check Pods Manifest.lock */,
 				03B091F7211793E500F07463 /* Sources */,
 				03B091F8211793E500F07463 /* Frameworks */,
 				03B091F9211793E500F07463 /* Resources */,
+				85B8ADB9CB5BED90200941E1 /* [CP] Embed Pods Frameworks */,
+				3F9165E8ECB217D4E5B3D4B7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -288,12 +405,181 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07BF52D7C0B7FB743EF84B2B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GHBCarRental/Pods-GHBCarRental-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		12DC4C5C12F43F405687C316 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GHBCarRentalUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		172F4D25C5835DA316B9017A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GHBCarRentalTests/Pods-GHBCarRentalTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F9165E8ECB217D4E5B3D4B7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77053C0A47BC7CE44E46060A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GHBCarRentalTests/Pods-GHBCarRentalTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81607FC0630B86757196CB82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GHBCarRental-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85B8ADB9CB5BED90200941E1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BD3E07784979A343A8103A8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GHBCarRental/Pods-GHBCarRental-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/EmptyDataSet-Swift/EmptyDataSet_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSONModel/SwiftyJSONModel.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EmptyDataSet_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSONModel.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GHBCarRental/Pods-GHBCarRental-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B538077711E6A7BD8299B307 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GHBCarRentalTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		03B091D8211793E300F07463 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03B092DB2117B8BB00F07463 /* RentalCar.swift in Sources */,
+				03B092D92117B26C00F07463 /* RentalProvider.swift in Sources */,
+				03B092E52117E52B00F07463 /* Date+Amadeus.swift in Sources */,
+				03B092CF21179A4100F07463 /* SearchViewController.swift in Sources */,
+				03B092DE2117C11200F07463 /* CarRentalGeosearch.swift in Sources */,
+				03B092E02117C14B00F07463 /* Globals.swift in Sources */,
+				03B092D121179B7000F07463 /* RentalSearchRequest.swift in Sources */,
+				03B092E22117E3AB00F07463 /* UnitConversions.swift in Sources */,
 				03B091E0211793E300F07463 /* AppDelegate.swift in Sources */,
+				03B092D321179E2700F07463 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +587,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03B092EB2118363200F07463 /* RentalProviderTests.swift in Sources */,
+				03B092E72117EA0900F07463 /* UnitConversionsTests.swift in Sources */,
+				03B092E92117ED2B00F07463 /* DateFormatterTests.swift in Sources */,
 				03B091F5211793E500F07463 /* GHBCarRentalTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +753,7 @@
 		};
 		03B09205211793E500F07463 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAA731E1AC15E95C8AB0C7A2 /* Pods-GHBCarRental.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -482,6 +772,7 @@
 		};
 		03B09206211793E500F07463 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D91029DE41D286A938DE7288 /* Pods-GHBCarRental.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -500,6 +791,7 @@
 		};
 		03B09208211793E500F07463 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97545AA00AE28307CC473C02 /* Pods-GHBCarRentalTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -521,6 +813,7 @@
 		};
 		03B09209211793E500F07463 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 900C4FBF65F7347BD0CA701D /* Pods-GHBCarRentalTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -542,6 +835,7 @@
 		};
 		03B0920B211793E500F07463 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03608E954B89AD657E065482 /* Pods-GHBCarRentalUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -562,6 +856,7 @@
 		};
 		03B0920C211793E500F07463 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0301E4BAB03C2F17E7F54723 /* Pods-GHBCarRentalUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
