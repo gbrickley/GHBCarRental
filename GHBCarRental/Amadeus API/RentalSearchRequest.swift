@@ -9,10 +9,20 @@
 import Foundation
 import CoreLocation
 
+/// Options available for ordering the search results
+enum ResultsOrderType {
+    /// The results will be ordered from closest to the center point
+    case proximity
+    /// The results will be ordered by price, low to high, and then secondly by proximity
+    case priceLowToHigh
+    /// The results will be ordered by price, high to low, and then secondly by proximity
+    case priceHighToLow
+}
+
 class RentalSearchRequest {
     
     /// The location at which to center the search, required to successfully search
-    var centerPoint: CLLocation? {
+    var centerPoint: CLPlacemark? {
         didSet {
             didChangeServerBasedSearchParameter()
         }
@@ -38,17 +48,7 @@ class RentalSearchRequest {
             didChangeServerBasedSearchParameter()
         }
     }
-    
-    /// Options available for ordering the search results
-    enum ResultsOrderType {
-        /// The results will be ordered from closest to the center point
-        case proximity
-        /// The results will be ordered by price, low to high, and then secondly by proximity
-        case priceLowToHigh
-        /// The results will be ordered by price, high to low, and then secondly by proximity
-        case priceHighToLow
-    }
-    
+        
     /**
      How to order the search resuls.  Defaults to `priceLowToHigh`. Once applying an order type, you should still retrieve results using the fetchResults(:) method.
      Developer note: For now, ordering is done on the client, so no need to retrieve new data from the server when this changes.
@@ -85,11 +85,23 @@ class RentalSearchRequest {
     private func providerArray(_ providers: Array<RentalProvider>, contains provider: RentalProvider ) -> Bool
     {
         for existingProvider in providers {
-            if (existingProvider.isEqualTo(rentalProvider: provider)) {
+            if (existingProvider.isSameCompanyAs(rentalProvider: provider)) {
                 return true
             }
         }
         return false
+    }
+    
+    
+    
+    /**
+     Whether or not all of the required properties are set to make a successful search request.
+     - returns: Bool
+     */
+    public func isValid() -> Bool
+    {
+        // These are the minimum required values in order to search
+        return centerPoint != nil && pickUpDate != nil && dropOffDate != nil
     }
     
 
@@ -138,6 +150,7 @@ class RentalSearchRequest {
                 // Save the cars and then apply the filers and sorting
                 self.results = rentalCars
                 let filteredResults = self.filteredAndSortedResults()
+                self.requestHasChangedSinceLastFetch = false
                 completion(Result.success(filteredResults))
                 
             case .error(let code, let friendlyMessage, let cause):
@@ -146,14 +159,19 @@ class RentalSearchRequest {
         })
     }
 
-    
     private func fetchAllSeachResults(completion: @escaping rentalSearchCompletionBlock)
     {
         // If we have saved valid results, no need to fetch from the server
         // If not, fetch the results from the server
+        print("[API]: Fetching all search results")
+        print("[API]: Server based params have changed: \(requestHasChangedSinceLastFetch)")
+        print("[API]: Current results count: \(results?.count ?? 0)")
+        
         if let resultsCopy = results, resultsCopy.count > 0, !requestHasChangedSinceLastFetch {
+            print("[API]: We have a valid cached result array, return that right away")
             completion(Result.success(resultsCopy))
         } else {
+            print("[API]: Refresh data from server")
             let search = CarRentalGeosearch()
             search.fetchResultsFor(searchRequest:self, completion: { response in
                 completion(response)
@@ -191,15 +209,68 @@ class RentalSearchRequest {
     /// Applies any of the set filters to the results data set
     private func applyFilters(to results: Array<RentalCar>) -> Array<RentalCar>
     {
-        // TODO: IMPLEMENT FOR REAL
-        return results
+        var filteredArray = results
+        
+        // Apply the rental provider filter if we have one
+        if let rentalProviderFilter = rentalProviderFilter {
+            filteredArray = filteredArray.filter {
+                return $0.provider.isSameCompanyAs(rentalProvider: rentalProviderFilter)
+            }
+        }
+
+        return filteredArray
     }
     
     /// Applies the chosen ordering to the results data set
     private func applyOrdering(to results: Array<RentalCar>) -> Array<RentalCar>
     {
-        // TODO: IMPLEMENT FOR REAL
-        return results
+        var orderedResults = results
+        
+        switch resultsOrderType {
+            
+        case ResultsOrderType.priceHighToLow:
+            orderedResults.sort {
+                let price1 = $0.price()
+                let price2 = $1.price()
+                
+                if let centerPoint = centerPoint, price1 == price2 {
+                    let distance1 = $0.provider.distanceAwayFrom(location: centerPoint.location!)
+                    let distance2 = $1.provider.distanceAwayFrom(location: centerPoint.location!)
+                    return distance1 < distance2
+                } else {
+                    return $0.price() > $1.price()
+                }
+            }
+        
+        case ResultsOrderType.priceLowToHigh:
+            orderedResults.sort {
+                let price1 = $0.price()
+                let price2 = $1.price()
+                
+                if let centerPoint = centerPoint, price1 == price2 {
+                    let distance1 = $0.provider.distanceAwayFrom(location: centerPoint.location!)
+                    let distance2 = $1.provider.distanceAwayFrom(location: centerPoint.location!)
+                    return distance1 < distance2
+                } else {
+                    return $0.price() < $1.price()
+                }
+            }
+            
+        case ResultsOrderType.proximity:
+            if let centerPoint = centerPoint {
+                orderedResults.sort {
+                    let distance1 = $0.provider.distanceAwayFrom(location: centerPoint.location!)
+                    let distance2 = $1.provider.distanceAwayFrom(location: centerPoint.location!)
+                    // If the distance is the same, sort by price
+                    if (distance1 == distance2) {
+                        return $0.price() < $1.price()
+                    } else {
+                        return distance1 < distance2
+                    }
+                }
+            }
+        }
+        
+        return orderedResults
     }
-
 }

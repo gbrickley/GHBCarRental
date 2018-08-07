@@ -34,13 +34,23 @@ class RentalProvider: JSONObjectInitializable {
     
     
     /**
-     Whether or not two rental provider objects represent the same provider.
+     Whether or not two rental provider objects represent the same branch.
      - Parameter rentalProvider: The provider to check against.
      - returns: Bool
      */
-    public func isEqualTo(rentalProvider: RentalProvider) -> Bool
+    public func isSameBranchAs(rentalProvider: RentalProvider) -> Bool
     {
         return branchId == rentalProvider.branchId
+    }
+    
+    /**
+     Whether or not two rental provider objects represent the same company.
+     - Parameter rentalProvider: The provider to check against.
+     - returns: Bool
+     */
+    public func isSameCompanyAs(rentalProvider: RentalProvider) -> Bool
+    {
+        return companyName.lowercased() == rentalProvider.companyName.lowercased() && companyCode.lowercased() == rentalProvider.companyCode.lowercased()
     }
     
     /**
@@ -65,6 +75,35 @@ class RentalProvider: JSONObjectInitializable {
         let distanceInMiles = unitConverter.milesFrom(meters: distanceInMeters)
         return distanceInMiles
     }
+    
+    /**
+     A string describing how far away the provider is from a given point. (i.e. `1.2 miles`)
+     - Parameter location: The location to check the distance from.
+     - returns: String
+     */
+    public func distanceAwayStringFrom(location: CLLocation) -> String
+    {
+        let distance = distanceAwayFrom(location: location)
+        let roundedDistance = distance.roundToPrecision(1)
+        let unit = roundedDistance == 1.0 ? "mile" : "miles"
+        return "\(roundedDistance) \(unit)"
+    }
+    
+    /**
+     The providers company logo.  If none can be found, returns a default icon.
+     - returns: UIImage (150x150)
+     */
+    public func companyLogo() -> UIImage
+    {
+        let companyName = self.companyName.lowercased()
+        let imageName = "rental-provider-\(companyName)"
+        if let image = UIImage(named: imageName) {
+            return image
+        } else {
+            return UIImage(named: "rental-provider-default-icon")!
+        }
+    }
+    
     
     enum PropertyKey: String {
         case branchId = "branch_id"

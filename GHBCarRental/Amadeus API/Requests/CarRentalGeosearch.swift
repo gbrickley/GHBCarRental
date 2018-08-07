@@ -30,8 +30,8 @@ class CarRentalGeosearch {
         params["radius"] = Int(round(radiusInKilometers))
         
         if let centerPoint = searchRequest.centerPoint {
-            params["latitude"] = centerPoint.coordinate.latitude
-            params["longitude"] = centerPoint.coordinate.longitude
+            params["latitude"] = centerPoint.location!.coordinate.latitude
+            params["longitude"] = centerPoint.location!.coordinate.longitude
         }
         
         if let pickupDate = searchRequest.pickUpDate {
@@ -120,5 +120,3 @@ class CarRentalGeosearch {
     }
     
 }
-
-

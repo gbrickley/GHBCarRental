@@ -14,35 +14,48 @@ class RentalCar: JSONObjectInitializable {
     /// The cars provider, required for all cars
     var provider: RentalProvider!
     
-    /// The cars transmission type
+    /// The 4 letter ACRISS code that defines the properties of car
     var acrissCode: String
     
-    /// The cars transmission type
+    /// Car details
     var transmissionType: String?
-
+    var fuelType: String?
+    var hasAirConditioning: Bool
+    
     // The estimated price of the rental
-    var totalPrice: String
+    var priceAsString: String
     var currencyType: String
     
-    public func priceString()
+    public func price() -> Double
     {
-        
+        return Double(priceAsString)!
+    }
+    
+    public func priceCurrencyString() -> String
+    {
+        return price().asLocalizedCurrencyStringWith(currencyCode:currencyType)
     }
     
     
     enum PropertyKey: String {
         case carInfo = "vehicle_info"
+        case fuelType = "fuel"
+        case hasAirConditioning = "air_conditioning"
         case acrissCode = "acriss_code"
         case transmissionType = "transmission"
         case estimatedTotal = "estimated_total"
-        case totalPrice = "amount"
+        case priceAsString = "amount"
         case currencyType = "currency"
     }
     
     required init(object: JSONObject<PropertyKey>) throws {
         acrissCode = try object.value(for: .carInfo, .acrissCode)
+        
+        fuelType = try object.value(for: .carInfo, .fuelType)
+        hasAirConditioning = try object.value(for: .carInfo, .hasAirConditioning)
+        
         transmissionType = try object.value(for: .carInfo, .transmissionType)
-        totalPrice = try object.value(for: .estimatedTotal, .totalPrice)
+        priceAsString = try object.value(for: .estimatedTotal, .priceAsString)
         currencyType = try object.value(for: .estimatedTotal, .currencyType)
     }
     
@@ -51,7 +64,9 @@ class RentalCar: JSONObjectInitializable {
         print("___________________________________________________________")
         print("Accriss Code: \(acrissCode)")
         print("Transmission Type: \(String(describing: transmissionType))")
-        print("Total Price: \(totalPrice)")
+        print("Fuel Type: \(String(describing: fuelType))")
+        print("Has AC: \(hasAirConditioning)")
+        print("Total Price: \(price())")
         print("Currency Type: \(currencyType)")
         provider.printData()
         print("___________________________________________________________")
