@@ -28,6 +28,33 @@ class AcrissDecoder {
     // MARK: - Public Methods
     
     /**
+     A (320x160) image representation of the vehicle category denoted by an Acriss code.
+     - Parameter acrissCode: The vehicles acriss code.
+     - returns: UIImage (320x160)
+     */
+    public func representativeImageForVehicleWith(acrissCode: String?) -> UIImage
+    {
+        let category = vehicleCategoryFor(acrissCode: acrissCode)
+        return representativeImageFor(vehicleCategory: category)
+    }
+    
+    
+    /**
+     A string descrining the 'vehicle type' for the given
+     - Parameter acrissCode: The acriss code to decode.
+     - returns: String?
+     */
+    public func vehicleTypeDescriptionFor(acrissCode: String?) -> String?
+    {
+        guard let acrissCode = acrissCode, isValidAcrissCode(acrissCode) else {
+            return nil
+        }
+        
+        let letter = capitalizedsubstring(fromString: acrissCode, atIndex: vehicleTypeCharcterIndex)
+        return vehicleTypeDescriptionFor(letter: letter)
+    }
+    
+    /**
      The vehicle category represented by a given Acriss code
      - Parameter acrissCode: The acriss code to decode.
      - returns: VehicleCategory
@@ -38,7 +65,7 @@ class AcrissDecoder {
             return VehicleCategory.unknown
         }
         
-        let code = substring(fromString: acrissCode, atIndex: categoryCharcterIndex)
+        let code = capitalizedsubstring(fromString: acrissCode, atIndex: categoryCharcterIndex)
 
         switch code {
             
@@ -71,17 +98,6 @@ class AcrissDecoder {
         }
     }
     
-    /**
-     A (320x160) image representation of the vehicle category denoted by an Acriss code.
-     - Parameter acrissCode: The vehicles acriss code.
-     - returns: UIImage (320x160)
-     */
-    public func representativeImageForVehicleWith(acrissCode: String?) -> UIImage
-    {
-        let category = vehicleCategoryFor(acrissCode: acrissCode)
-        return representativeImageFor(vehicleCategory: category)
-    }
-    
     
     // MARK: Private Properties
     
@@ -90,6 +106,7 @@ class AcrissDecoder {
     
     /// The index of the Acriss string where the category denoter can be found
     fileprivate let categoryCharcterIndex = 0
+    fileprivate let vehicleTypeCharcterIndex = 1
     
     // The codes for each category type
     fileprivate let codesMini      = ["M","N"]
@@ -111,11 +128,12 @@ extension AcrissDecoder {
         return acrissCode.count == 4
     }
     
-    private func substring(fromString str: String, atIndex indexOfCharacter: Int) -> String
+    private func capitalizedsubstring(fromString str: String, atIndex indexOfCharacter: Int) -> String
     {
         let index = str.index(str.startIndex, offsetBy: indexOfCharacter)
         let char = str[index]
-        return String(char)
+        let str = String(char)
+        return str.capitalized
     }
     
     private func representativeImageFor(vehicleCategory: VehicleCategory) -> UIImage
@@ -156,4 +174,32 @@ extension AcrissDecoder {
         }*/
     }
     
+    private func vehicleTypeDescriptionFor(letter: String) -> String?
+    {
+        switch letter {
+            case "B": return "2-3 Door"
+            case "C": return "2/4 Door"
+            case "D": return "4-5 Door"
+            case "W": return "Wagon/Estate"
+            case "V": return "Passenger Van"
+            case "L": return "Limousine"
+            case "S": return "Sport"
+            case "T": return "Convertible"
+            case "F": return "SUV"
+            case "J": return "Open Air All Terrain"
+            case "X": return "Special"
+            case "P": return "Pick up"
+            case "Q": return "Pick up Extended Car"
+            case "Z": return "Special Offer Car"
+            case "E": return "Coupe"
+            case "M": return "Monospace"
+            case "R": return "Recreational Vehicle"
+            case "H": return "Motor Home"
+            case "Y": return "2 Wheel Vehicle"
+            case "N": return "Roadster"
+            case "G": return "Crossover"
+            case "K": return "Commercial Van/Truck"
+            default: return nil
+        }
+    }
 }

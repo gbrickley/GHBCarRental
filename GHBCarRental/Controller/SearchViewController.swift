@@ -12,6 +12,7 @@ import CoreLocation
 import LocationPicker
 import AirbnbDatePicker
 import MBProgressHUD
+import EmptyDataSet_Swift
 
 class SearchViewController: UIViewController {
     
@@ -41,21 +42,25 @@ class SearchViewController: UIViewController {
     // This array will hold the vehicle options that we're currently showing
     var searchResults = [RentalCar]()
     
+    // If the most recent search request encountered an error, we'll save it here
+    var errorMessage: String?
+    
     // The available ordering type options
     let resultsOrderTypes = [ResultsOrderType.priceLowToHigh, ResultsOrderType.priceHighToLow, ResultsOrderType.proximity]
     
     // This array will hold available 'provider' filters that the user can choose from
     var providerFilterOptions = [RentalProvider]()
-    
-    // Helps decode Acriss codes
-    let acrissDecoder = AcrissDecoder()
-    
+        
     // The progress indicator we'll use when loading options
     var progressHUD: MBProgressHUD?
+    
+
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         setupDesign()
         initialViewSetup()
     }
@@ -354,6 +359,10 @@ class SearchViewController: UIViewController {
     {
         print("Load search results!")
         showLoadingView()
+        
+        // Clear any old errors
+        errorMessage = nil
+        
         searchRequest.fetchSearchResults(completion: { result in
             
             switch result {
@@ -365,6 +374,7 @@ class SearchViewController: UIViewController {
                 
             case .error(let code, let description, let moreInfo):
                 print("Error [\(code)]: \(description). \(moreInfo)")
+                self.errorMessage = description
             }
             
             self.tableView.reloadData()
@@ -464,36 +474,25 @@ extension SearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell", for: indexPath) as! CarRentalOptionCell
         
         let car = searchResults[indexPath.row]
-        //car.printData()
-        
-        cell.carImageView.image = acrissDecoder.representativeImageForVehicleWith(acrissCode: car.acrissCode)
+        cell.carImageView.image = car.representativeImage()
         cell.providerImageView.image = car.provider.companyLogo()
         cell.priceLabel.text = car.priceCurrencyString()
+        cell.setFeatures(car.features())
+        cell.descriptionLabel.text = "\(car.provider.companyName)"
         
-        var carDescription = "\(car.provider.companyName)"
-
+        var details = "\(car.provider.streetAddress())"
         if let centerLocation = searchRequest.centerPoint?.location {
             let distance = car.provider.distanceAwayStringFrom(location: centerLocation)
-            carDescription += " - \(distance) away"
+             details += " - \(distance) away"
         }
-
-        cell.descriptionLabel.text = carDescription
         
-        // Grab the features
-        var features = [String]()
-        
-        if let transmissionType = car.transmissionType {
-            features.append(transmissionType)
-        }
-        if car.hasAirConditioning {
-            features.append("Air Conditioning")
-        }
-        if let fuelType = car.fuelType, fuelType != "Unspecified" {
-            features.append(fuelType)
-        }
-        cell.setFeatures(features)
-        
+        cell.distanceAwayLabel.text = details
         return cell
+    }
+    
+    func presentDetailsForCar(_ car: RentalCar)
+    {
+        print("Present details for car: \(car)")
     }
 }
 
@@ -503,6 +502,8 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
+        let car = searchResults[indexPath.row]
+        presentDetailsForCar(car)
     }
 }
 
@@ -557,6 +558,72 @@ extension SearchViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         case .priceHighToLow:
             return "Price, High to Low"
         }
+    }
+}
+
+
+// MARK: - Empty Data Set Source
+extension SearchViewController: EmptyDataSetSource {
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString?
+    {
+        var title = ""
+        if !searchRequest.isValid() {
+            title = "Let's Find a Car!"
+        } else if errorMessage != nil {
+            title = "Search Error"
+        } else {
+            title = "Not Results Found"
+        }
+        
+        let atts = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]
+        return NSAttributedString.init(string: title, attributes: atts)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString?
+    {
+        var descrip = ""
+        if !searchRequest.isValid() {
+            descrip = "Choose a location and date range to begin searching."
+        } else if let errorMessage = errorMessage {
+            descrip = "Error: \(errorMessage)"
+        } else {
+            descrip = "Could not find any options for your chosen location and date range.  Please try modifying your search."
+        }
+        
+        let atts = [NSAttributedStringKey.foregroundColor: UIColor.gray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)]
+        return NSAttributedString.init(string: descrip, attributes: atts)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControlState) -> NSAttributedString?
+    {
+        guard errorMessage != nil else {
+            return nil
+        }
+        
+        let title = "Retry"
+        let atts = [NSAttributedStringKey.foregroundColor: UIColor.gray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)]
+        return NSAttributedString.init(string: title, attributes: atts)
+    }
+    
+    func buttonBackgroundImage(forEmptyDataSet scrollView: UIScrollView, for state: UIControlState) -> UIImage?
+    {
+        guard errorMessage != nil else {
+            return nil
+        }
+        
+        let capInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        let rectInsets = UIEdgeInsets(top: -19, left: -61, bottom: -19, right: -61)
+        let image = UIImage.init(named: "empty-set-btn-bg")
+        return image?.resizableImage(withCapInsets: capInsets, resizingMode: .stretch).withAlignmentRectInsets(rectInsets)
+    }
+}
+
+// MARK: - Empty Data Set Delegate
+extension SearchViewController: EmptyDataSetDelegate {
+    
+    func emptyDataSet(_ scrollView: UIScrollView, didTapButton button: UIButton) {
+        refreshOptions()
     }
 }
 

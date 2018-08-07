@@ -14,6 +14,7 @@ class CarRentalOptionCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var providerImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var distanceAwayLabel: UILabel!
     
     @IBOutlet weak var featureContainer1: UIView!
     @IBOutlet weak var featureLabel1: UILabel!

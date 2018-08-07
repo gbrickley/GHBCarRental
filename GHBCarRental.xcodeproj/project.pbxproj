@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0300254F211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300254E211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift */; };
 		03B091E0211793E300F07463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091DF211793E300F07463 /* AppDelegate.swift */; };
 		03B091E5211793E300F07463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E3211793E300F07463 /* Main.storyboard */; };
 		03B091E7211793E500F07463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E6211793E500F07463 /* Assets.xcassets */; };
@@ -26,7 +27,7 @@
 		03B092E92117ED2B00F07463 /* DateFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092E82117ED2B00F07463 /* DateFormatterTests.swift */; };
 		03B092EB2118363200F07463 /* RentalProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092EA2118363200F07463 /* RentalProviderTests.swift */; };
 		03B092ED21189AB900F07463 /* AcrissDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092EC21189AB900F07463 /* AcrissDecoder.swift */; };
-		03B092EF2118AB3900F07463 /* AcrissDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092EE2118AB3900F07463 /* AcrissDecoderTests.swift */; };
+		03B092EF2118AB3900F07463 /* AcrissCategoryDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092EE2118AB3900F07463 /* AcrissCategoryDecoderTests.swift */; };
 		03B092F12118D6B400F07463 /* Double+Amadeus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092F02118D6B400F07463 /* Double+Amadeus.swift */; };
 		03B092F32118EFA100F07463 /* UIView+GHBCarRental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092F22118EFA100F07463 /* UIView+GHBCarRental.swift */; };
 		03B092F62118F0E700F07463 /* CarRentalOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092F52118F0E700F07463 /* CarRentalOptionCell.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0300254E211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcrissVehicleTypeDecoderTests.swift; sourceTree = "<group>"; };
 		0301E4BAB03C2F17E7F54723 /* Pods-GHBCarRentalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		03608E954B89AD657E065482 /* Pods-GHBCarRentalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		03B091DC211793E300F07463 /* GHBCarRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHBCarRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +87,7 @@
 		03B092E82117ED2B00F07463 /* DateFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterTests.swift; sourceTree = "<group>"; };
 		03B092EA2118363200F07463 /* RentalProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalProviderTests.swift; sourceTree = "<group>"; };
 		03B092EC21189AB900F07463 /* AcrissDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcrissDecoder.swift; sourceTree = "<group>"; };
-		03B092EE2118AB3900F07463 /* AcrissDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcrissDecoderTests.swift; sourceTree = "<group>"; };
+		03B092EE2118AB3900F07463 /* AcrissCategoryDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcrissCategoryDecoderTests.swift; sourceTree = "<group>"; };
 		03B092F02118D6B400F07463 /* Double+Amadeus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Amadeus.swift"; sourceTree = "<group>"; };
 		03B092F22118EFA100F07463 /* UIView+GHBCarRental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+GHBCarRental.swift"; sourceTree = "<group>"; };
 		03B092F52118F0E700F07463 /* CarRentalOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarRentalOptionCell.swift; sourceTree = "<group>"; };
@@ -176,7 +178,8 @@
 				03B092E62117EA0900F07463 /* UnitConversionsTests.swift */,
 				03B092E82117ED2B00F07463 /* DateFormatterTests.swift */,
 				03B091F4211793E500F07463 /* GHBCarRentalTests.swift */,
-				03B092EE2118AB3900F07463 /* AcrissDecoderTests.swift */,
+				03B092EE2118AB3900F07463 /* AcrissCategoryDecoderTests.swift */,
+				0300254E211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift */,
 				03B091F6211793E500F07463 /* Info.plist */,
 			);
 			path = GHBCarRentalTests;
@@ -194,7 +197,6 @@
 		03B0920D211793EF00F07463 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				03B092EC21189AB900F07463 /* AcrissDecoder.swift */,
 				03B092F9211908CE00F07463 /* UserLocationManager.swift */,
 			);
 			path = Model;
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				03B092DF2117C14B00F07463 /* Globals.swift */,
+				03B092EC21189AB900F07463 /* AcrissDecoder.swift */,
 				03B092E12117E3AB00F07463 /* UnitConversions.swift */,
 				03B092E42117E52B00F07463 /* Date+Amadeus.swift */,
 				03B092F02118D6B400F07463 /* Double+Amadeus.swift */,
@@ -638,9 +641,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0300254F211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift in Sources */,
 				03B092EB2118363200F07463 /* RentalProviderTests.swift in Sources */,
 				03B092E72117EA0900F07463 /* UnitConversionsTests.swift in Sources */,
-				03B092EF2118AB3900F07463 /* AcrissDecoderTests.swift in Sources */,
+				03B092EF2118AB3900F07463 /* AcrissCategoryDecoderTests.swift in Sources */,
 				03B092E92117ED2B00F07463 /* DateFormatterTests.swift in Sources */,
 				03B091F5211793E500F07463 /* GHBCarRentalTests.swift in Sources */,
 			);

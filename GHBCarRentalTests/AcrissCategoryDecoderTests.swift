@@ -9,7 +9,7 @@
 import XCTest
 @testable import GHBCarRental
 
-class AcrissDecoderTests: XCTestCase {
+class AcrissCategoryDecoderTests: XCTestCase {
     
     var decoder: AcrissDecoder!
         

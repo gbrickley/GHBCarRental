@@ -69,7 +69,7 @@ class RentalProviderTests: XCTestCase {
         provider2.branchId = "branch1"
         
         // Then:
-        let isEqual = provider1.isEqualTo(rentalProvider: provider2)
+        let isEqual = provider1.isSameBranchAs(rentalProvider: provider2)
         XCTAssert(isEqual, "Equality not correctly determined.")
     }
     
@@ -80,7 +80,7 @@ class RentalProviderTests: XCTestCase {
         provider2.branchId = "branch2"
         
         // Then:
-        let isEqual = provider1.isEqualTo(rentalProvider: provider2)
+        let isEqual = provider1.isSameBranchAs(rentalProvider: provider2)
         XCTAssertFalse(isEqual, "Equality not correctly determined.")
     }
     

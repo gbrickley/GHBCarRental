@@ -26,6 +26,9 @@ class RentalCar: JSONObjectInitializable {
     var priceAsString: String
     var currencyType: String
     
+    // Helps decode Acriss codes
+    let acrissDecoder = AcrissDecoder()
+    
     public func price() -> Double
     {
         return Double(priceAsString)!
@@ -34,6 +37,31 @@ class RentalCar: JSONObjectInitializable {
     public func priceCurrencyString() -> String
     {
         return price().asLocalizedCurrencyStringWith(currencyCode:currencyType)
+    }
+    
+    public func representativeImage() -> UIImage
+    {
+        return acrissDecoder.representativeImageForVehicleWith(acrissCode: acrissCode)
+    }
+    
+    public func features() -> Array<String>
+    {
+        var features = [String]()
+        
+        if let vehicleType = acrissDecoder.vehicleTypeDescriptionFor(acrissCode: acrissCode) {
+            features.append(vehicleType)
+        }
+        if let transmissionType = transmissionType {
+            features.append(transmissionType)
+        }
+        if hasAirConditioning {
+            features.append("Air Conditioning")
+        }
+        if let fuelType = fuelType, fuelType != "Unspecified" {
+            features.append(fuelType)
+        }
+        
+        return features
     }
     
     

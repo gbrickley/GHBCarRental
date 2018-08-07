@@ -59,7 +59,20 @@ class RentalProvider: JSONObjectInitializable {
      */
     public func fullAddress() -> String
     {
-        return "\(addressLineOne) \(addressLineTwo ?? "") \(city), \(state)"
+        return "\(streetAddress()) \(city), \(state)"
+    }
+    
+    /**
+     A brief string representin the address of the provider.
+     - returns: String
+     */
+    public func streetAddress() -> String
+    {
+        var address = "\(addressLineOne)"
+        if let lineTwo = addressLineTwo {
+            address += " \(lineTwo)"
+        }
+        return address
     }
     
     /**
