@@ -13,10 +13,12 @@ import UIKit
 import CoreLocation
 import MapKit
 
+
 protocol RentalOptionDetailViewDelegate: class {
-    // Called when the rental option detail view wants to close
+    /// Called when the rental option detail view wants to close
     func rentalOptionsViewDidRequestToClose(view: RentalOptionDetailViewController)
 }
+
 
 class RentalOptionDetailViewController: UIViewController {
     
@@ -44,7 +46,7 @@ class RentalOptionDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var distanceAwayLabel: UILabel!
     @IBOutlet weak var fullDescriptionLabel: UILabel!
-    
+
     @IBOutlet weak var pickupLabel: UILabel!
     @IBOutlet weak var dropoffLabel: UILabel!
     
@@ -66,6 +68,17 @@ class RentalOptionDetailViewController: UIViewController {
         initialViewSetup()
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
+
+
+// MARK: - Private Methods
+private extension RentalOptionDetailViewController {
+    
+    // MARK: View Setup
+    
     func initialViewSetup()
     {
         carImageView.image = car.representativeImage()
@@ -81,10 +94,10 @@ class RentalOptionDetailViewController: UIViewController {
         
         // TODO: Decide if we want to use search center or users current location
         /*
-        if let location = UserLocationManager.sharedInstance.usersCurrentLocation() {
-            let distance = car.provider.distanceAwayStringFrom(location: location)
-            details += " - \(distance) away"
-        }*/
+         if let location = UserLocationManager.sharedInstance.usersCurrentLocation() {
+         let distance = car.provider.distanceAwayStringFrom(location: location)
+         details += " - \(distance) away"
+         }*/
         
         if let location = centerPoint?.location {
             let distance = car.provider.distanceAwayStringFrom(location: location)
@@ -126,31 +139,32 @@ class RentalOptionDetailViewController: UIViewController {
         fullDescriptionLabel.text = descrip
     }
     
-    func close()
-    {
-        delegate.rentalOptionsViewDidRequestToClose(view: self)
-    }
     
-
-    func presentNavigation()
-    {
-        let coordinate = CLLocationCoordinate2DMake(car.provider.locationLatitude, car.provider.locationLongitude)
-        let name = car.provider.companyName
-        UserLocationManager.sharedInstance.presentDrivingDirectionsTo(place: name, atCoordinate: coordinate)
-    }
-    
-    
-    @IBAction func didRequestToStartNavigation(_ sender: Any)
-    {
-        presentNavigation()
-    }
+    // MARK: Close
     
     @IBAction func didRequestToClose(_ sender: Any)
     {
         close()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func close()
+    {
+        delegate.rentalOptionsViewDidRequestToClose(view: self)
+    }
+    
+    
+    // MARK: Navigation
+    
+    @IBAction func didRequestToStartNavigation(_ sender: Any)
+    {
+        presentNavigation()
+    }
+    
+    func presentNavigation()
+    {
+        let coordinate = CLLocationCoordinate2DMake(car.provider.locationLatitude, car.provider.locationLongitude)
+        let name = car.provider.companyName
+        UserLocationManager.sharedInstance.presentDrivingDirectionsTo(place: name, atCoordinate: coordinate)
     }
 }
+

@@ -12,7 +12,7 @@ import MapKit
 
 
 protocol MapViewDelegate: class {
-    // Called when the map view wants to close
+    /// Called when the map view wants to close
     func mapViewDidRequestToClose(view: MapViewController)
 }
 
