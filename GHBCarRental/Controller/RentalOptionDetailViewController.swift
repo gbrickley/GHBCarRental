@@ -71,18 +71,17 @@ class RentalOptionDetailViewController: UIViewController {
         
         var details = "\(car.provider.streetAddress())"
         
-        // TODO: FIX
+        // TODO: Decide if we want to use search center or users current location
         /*
         if let location = UserLocationManager.sharedInstance.usersCurrentLocation() {
             let distance = car.provider.distanceAwayStringFrom(location: location)
             details += " - \(distance) away"
         }*/
         
-        /*
         if let location = centerPoint?.location {
             let distance = car.provider.distanceAwayStringFrom(location: location)
             details += " - \(distance) away"
-        }*/ 
+        }
         
         distanceAwayLabel.text = details
     }

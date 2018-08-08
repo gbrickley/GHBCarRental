@@ -55,7 +55,6 @@ class SearchViewController: UIViewController {
     var progressHUD: MBProgressHUD?
     
 
-
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -65,26 +64,14 @@ class SearchViewController: UIViewController {
         initialViewSetup()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
         // If the user hasn't set a search location yet, grab their current location
-        print("Current search center: \(String(describing: searchRequest.centerPoint))")
         if searchRequest.centerPoint == nil {
             setSearchCenterToUsersCurrentLocation()
         }
-    }
-    
-    func setSearchCenterToUsersCurrentLocation()
-    {
-        showLoadingViewWithMesage("Updating location...")
-        UserLocationManager.sharedInstance.fetchUsersCurrentLocation(completion: { placemark, error in
-            print("Location fetch did return!")
-            print(String(describing: placemark) )
-            print(String(describing: error) )
-            self.hideLoadingView()
-            if let placemark = placemark {
-                self.updateSearchCenterToPlacemark(placemark)
-            }
-        })
     }
     
     func setupDesign()
@@ -106,6 +93,17 @@ class SearchViewController: UIViewController {
     
     
     // MARK: - Search Location
+    
+    func setSearchCenterToUsersCurrentLocation()
+    {
+        showLoadingViewWithMesage("Updating location...")
+        UserLocationManager.sharedInstance.fetchUsersCurrentLocation(completion: { placemark, error in
+            self.hideLoadingView()
+            if let placemark = placemark {
+                self.updateSearchCenterToPlacemark(placemark)
+            }
+        })
+    }
     
     @IBAction func didRequestToEditLocation(_ sender: Any) {
         presentLocationPicker()
@@ -133,10 +131,8 @@ class SearchViewController: UIViewController {
                 self.updateSearchCenterToPlacemark(location.placemark)
             }
         }
-        
-        let nav = UINavigationController(rootViewController: locationPicker)
-        self.present(nav, animated: true, completion: nil)
-        //navigationController?.pushViewController(locationPicker, animated: true)
+
+        navigationController?.pushViewController(locationPicker, animated: true)
     }
     
     func updateSearchCenterToPlacemark(_ placemark: CLPlacemark )
@@ -492,18 +488,17 @@ extension SearchViewController: UITableViewDataSource {
         
         var details = "\(car.provider.streetAddress())"
         
-        // TODO: FIX
+        // TODO: Decide if we want to use search center or users current location
         /*
         if let location = UserLocationManager.sharedInstance.usersCurrentLocation() {
             let distance = car.provider.distanceAwayStringFrom(location: location)
             details += " - \(distance) away"
         }*/
         
-        /*
         if let centerLocation = searchRequest.centerPoint?.location {
             let distance = car.provider.distanceAwayStringFrom(location: centerLocation)
              details += " - \(distance) away"
-        }*/
+        }
         
         cell.distanceAwayLabel.text = details
         return cell
