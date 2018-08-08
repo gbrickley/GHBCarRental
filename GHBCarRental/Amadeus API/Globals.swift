@@ -16,8 +16,7 @@ enum Result<T> {
 
 struct AmadeusAPIConstant {
     static let baseUrl = "https://api.sandbox.amadeus.com/v1.2"
-    // TODO: Including API key here for now, since it is only a sandbox key
-    static let apiKey = "UJQDEOHNl22Xwr3yiXD5tXiGo56QGnzi"
+    static let apiKey = "UJQDEOHNl22Xwr3yiXD5tXiGo56QGnzi" // TODO: Including API key here for now, since it is only a sandbox key
 }
 
 struct AmadeusAPIDefaults {

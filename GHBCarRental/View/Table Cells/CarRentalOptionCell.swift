@@ -25,7 +25,11 @@ class CarRentalOptionCell: UITableViewCell {
     @IBOutlet weak var featureContainer3: UIView!
     @IBOutlet weak var featureLabel3: UILabel!
     
-    func setFeatures(_ features: Array<String>)
+    /**
+     Sets an array of features.
+     - Parameter features: The features to set, can be up to 3 features.
+     */
+    public func setFeatures(_ features: Array<String>)
     {
         if features.count > 0 {
             featureLabel1.text = features[0]
@@ -48,13 +52,4 @@ class CarRentalOptionCell: UITableViewCell {
             featureContainer3.isHidden = true
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }

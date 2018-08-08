@@ -21,15 +21,25 @@ class RentalProvider: JSONObjectInitializable {
     /// The Amadeus 2-character company code of this car rental provider, required for all providers
     var companyCode: String
     
-    // The providers location, represented by latitude and longitude
+    // The providers location latitude
     var locationLatitude: Double
+    
+    // The providers location longitude
     var locationLongitude: Double
     
-    // The providers address
+    // The first line of the providers address
     var addressLineOne: String
+    
+    // The second line of the providers address
     var addressLineTwo: String?
+    
+    // The providers city
     var city: String
+    
+    // The providers state
     var state: String
+    
+    // The providers country
     var country: String
     
     
@@ -104,7 +114,7 @@ class RentalProvider: JSONObjectInitializable {
     
     /**
      The providers company logo.  If none can be found, returns a default icon.
-     - returns: UIImage (150x150)
+     - returns: UIImage (120x120)
      */
     public func companyLogo() -> UIImage
     {
@@ -117,6 +127,28 @@ class RentalProvider: JSONObjectInitializable {
         }
     }
     
+    /**
+     Prints info about the rental provider. Useful for debugging.
+     */
+    func printData()
+    {
+        print("Branch Id: \(branchId)")
+        print("Company Name: \(companyName)")
+        print("Company Code: \(companyCode)")
+        print("Latitude: \(locationLatitude)")
+        print("Longitude: \(locationLongitude)")
+        print("Address Line One: \(addressLineOne) |")
+        print("Address Line Two: \(String(describing: addressLineTwo))")
+        print("City: \(city)")
+        print("State: \(state)")
+        print("Country: \(country)")
+        print(fullAddress())
+        let centralLocation = CLLocation(latitude: 35.07057, longitude: -114.58937)
+        print(distanceAwayFrom(location: centralLocation))
+    }
+    
+    
+    // MARK: - Private
     
     enum PropertyKey: String {
         case branchId = "branch_id"
@@ -134,7 +166,8 @@ class RentalProvider: JSONObjectInitializable {
         case country = "country"
     }
     
-    required init(object: JSONObject<PropertyKey>) throws {
+    required init(object: JSONObject<PropertyKey>) throws
+    {
         branchId = try object.value(for: .branchId)
         companyName = try object.value(for: .provider, .companyName)
         companyCode = try object.value(for: .provider, .companyCode)
@@ -145,22 +178,5 @@ class RentalProvider: JSONObjectInitializable {
         city = try object.value(for: .address, .city)
         state = try object.value(for: .address, .state)
         country = try object.value(for: .address, .country)
-    }
-    
-    func printData()
-    {
-        print("Branch Id: \(branchId)")
-        print("Company Name: \(companyName)")
-        print("Company Code: \(companyCode)")
-        print("Latitude: \(locationLatitude)")
-        print("Longitude: \(locationLongitude)")
-        print("Address Line One: \(addressLineOne) |")
-        print("Address Line Two: \(String(describing: addressLineTwo))")
-        print("City: \(city)")
-        print("State: \(state)")
-        print("Country: \(country)")
-        print(fullAddress())
-        let centralLocation = CLLocation(latitude: 35.07057, longitude: -114.58937)
-        print(distanceAwayFrom(location: centralLocation))
     }
 }

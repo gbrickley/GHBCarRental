@@ -28,9 +28,9 @@ class AcrissDecoder {
     // MARK: - Public Methods
     
     /**
-     A (320x160) image representation of the vehicle category denoted by an Acriss code.
+     An image representation of the vehicle category denoted by an Acriss code.
      - Parameter acrissCode: The vehicles acriss code.
-     - returns: UIImage (320x160)
+     - returns: UIImage (500x200)
      */
     public func representativeImageForVehicleWith(acrissCode: String?) -> UIImage
     {
@@ -38,9 +38,8 @@ class AcrissDecoder {
         return representativeImageFor(vehicleCategory: category)
     }
     
-    
     /**
-     A string descrining the 'vehicle type' for the given
+     A string describing the 'vehicle type' for the given Acriss code.
      - Parameter acrissCode: The acriss code to decode.
      - returns: String?
      */
@@ -55,7 +54,7 @@ class AcrissDecoder {
     }
     
     /**
-     The vehicle category represented by a given Acriss code
+     The vehicle category represented by a given Acriss code.
      - Parameter acrissCode: The acriss code to decode.
      - returns: VehicleCategory
      */

@@ -12,7 +12,7 @@ import MapKit
 
 class UserLocationManager: NSObject {
     
-    // Singleton instance
+    // Always access the location manager through the shared instance
     static let sharedInstance = UserLocationManager()
     
     // The location manager helps us get access to the users location
@@ -29,6 +29,9 @@ class UserLocationManager: NSObject {
     
     /// Block used to return data about the user current location
     typealias UserLocationCompletionBlock = (_ currentLocation: CLPlacemark?, _ error: String?) -> Void
+    
+    // To make sure the manager is always accessed through the `sharedInstance`
+    private override init() {}
     
     
     // MARK: - Public Methods
@@ -133,6 +136,7 @@ private extension UserLocationManager {
         })
     }
 }
+
 
 // MARK: - CLLocationManagerDelegate
 extension UserLocationManager: CLLocationManagerDelegate {

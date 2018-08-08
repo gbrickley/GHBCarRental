@@ -12,6 +12,15 @@ import MapKit
 
 class MapViewFactory {
     
+    /**
+     Creates a new instance of a `MapViewController`.
+     - Parameter cars: The cars to display on the map.
+     - Parameter centerPoint: The center point of the users search.
+     - Parameter pickupDate: The users set pickup date.
+     - Parameter dropoffDate: The users set dropoff date.
+     - Parameter delegate: The delegate object for the new view.
+     - returns: MapViewController
+     */
     public func mapViewForCars(_ cars: Array<RentalCar>, usingCenterPoint centerPoint: CLPlacemark?, withPickupDate pickupDate: Date?, dropoffDate: Date?, andDelegate delegate: MapViewDelegate) -> MapViewController
     {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

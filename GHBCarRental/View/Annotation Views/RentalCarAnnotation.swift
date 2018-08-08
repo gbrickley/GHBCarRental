@@ -17,6 +17,14 @@ class RentalCarAnnotation: NSObject, MKAnnotation {
     let car: RentalCar
     let coordinate: CLLocationCoordinate2D
     
+    /**
+     Creates a new instance of a `RentalCarAnnotation` annotation.
+     - Parameter title: The annotations title.
+     - Parameter subtitle: The annotations subtitle.
+     - Parameter coordinate: The annotations coordinate.
+     - Parameter car: The car that this annotations represents.
+     - returns: RentalCarAnnotation
+     */
     init(title: String, subtitle: String, coordinate: CLLocationCoordinate2D, car: RentalCar)
     {
         self.title = title
@@ -25,5 +33,4 @@ class RentalCarAnnotation: NSObject, MKAnnotation {
         self.car = car
         super.init()
     }
-    
 }

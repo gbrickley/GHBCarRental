@@ -28,7 +28,7 @@ extension Date {
         return Calendar.current.isDate(self, equalTo: date, toGranularity: .year)
     }
     
-    /// The date, as a date string in the form 'Jan 10'
+    /// The date, as a date string in the form 'Jan 10th after 5pm'
     func briefDateStringWithDateTimeSepatingString(_ string: String) -> String
     {
         let calendar = Calendar.current
@@ -42,7 +42,7 @@ extension Date {
         return formatter.string(from: self)
     }
     
-    /// Returns a date with all componetns that same except the time updated
+    /// Returns a date with all components that same except the time updated
     func dateWithUpdatedTime(hour: Int, min: Int) -> Date
     {
         let x: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
@@ -57,6 +57,7 @@ extension Date {
         return cal.date(from: components)!
     }
     
+    /// The appropriate ordinal suffix for a given day of the month ('st','nd','rd','th')
     func ordinalSuffixForDayNumber(_ dayNumber: Int?) -> String
     {
         switch (dayNumber) {

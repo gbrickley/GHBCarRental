@@ -5,9 +5,12 @@
 //  Created by George Brickley on 8/5/18.
 //  Copyright © 2018 George Brickley. All rights reserved.
 //
+//  The `RentalSearchRequest` is used to create and then retrieve rental car options.
+//
 
 import Foundation
 import CoreLocation
+
 
 /// Options available for ordering the search results
 enum ResultsOrderType {
@@ -18,6 +21,7 @@ enum ResultsOrderType {
     /// The results will be ordered by price, high to low, and then secondly by proximity
     case priceHighToLow
 }
+
 
 class RentalSearchRequest {
     
@@ -50,49 +54,20 @@ class RentalSearchRequest {
     }
         
     /**
-     How to order the search resuls.  Defaults to `priceLowToHigh`. Once applying an order type, you should still retrieve results using the fetchResults(:) method.
-     Developer note: For now, ordering is done on the client, so no need to retrieve new data from the server when this changes.
+     How to order the search resuls.  Defaults to `priceLowToHigh`. Once applying an order type, you should still retrieve results using the `fetchSearchResults(completion:)` method.
+     Developer note: For now, ordering is done on the client, so new data is NOT fetched from the server when this changes.
      */
     var resultsOrderType: ResultsOrderType = ResultsOrderType.priceLowToHigh
     
+    
     /**
-     An optional filter that will show only results from the given rental provider. After applying this filter, you should still retrieve results using the fetchResults(:) method.
-     Developer note: For now, filtering is done on the client so no need to retrieve new data from the server when this changes.
+     An optional filter that will show only results from the given rental provider. After applying this filter, you should still retrieve results using the `fetchSearchResults(completion:)` method.
+     Developer note: For now, filtering is done on the client so new data is NOT fetched from the server when this changes.
      */
     var rentalProviderFilter: RentalProvider?
     
-    /**
-     A unique array of providers that can be used to filer the search results, ordered alphabetically by company name.
-     - returns: Array<RentalProvider>
-     */
-    public func rentalProviderFilterOptions() -> Array<RentalProvider>
-    {
-        guard let results = results else {
-            return []
-        }
-        
-        var uniqueProviders = [RentalProvider]()
-        for car in results {
-            if ( !providerArray(uniqueProviders, contains: car.provider) ) {
-                uniqueProviders.append(car.provider)
-            }
-        }
-        
-        // Now sort alphabetically by company name
-        return uniqueProviders.sorted{ $0.companyName < $1.companyName }
-    }
     
-    private func providerArray(_ providers: Array<RentalProvider>, contains provider: RentalProvider ) -> Bool
-    {
-        for existingProvider in providers {
-            if (existingProvider.isSameCompanyAs(rentalProvider: provider)) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    
+    // MARK: Public Methods
     
     /**
      Whether or not all of the required properties are set to make a successful search request.
@@ -107,6 +82,7 @@ class RentalSearchRequest {
 
     /**
      Retreieves search results for the current state of the search request.
+     Note: If none of the 'server based' search parameters have been changed, the request will return the last fetched results, sorted and filtered appropriately.  When one or more 'server based' search parameters has been changed, the request will fetch new data from the server.
      - Parameter rentalSearchCompletionBlock: The block to be executed when the request finishes. If the request is successful, an array of `RentalCar` objects will be returned.
      */
     public func fetchSearchResults(completion: @escaping rentalSearchCompletionBlock)
@@ -158,20 +134,62 @@ class RentalSearchRequest {
             }
         })
     }
+    
+    
+    /**
+     A unique array of providers that can be used to filer the search results, ordered alphabetically by company name.
+     - returns: Array<RentalProvider>
+     */
+    public func rentalProviderFilterOptions() -> Array<RentalProvider>
+    {
+        guard let results = results else {
+            return []
+        }
+        
+        var uniqueProviders = [RentalProvider]()
+        for car in results {
+            if ( !providerArray(uniqueProviders, contains: car.provider) ) {
+                uniqueProviders.append(car.provider)
+            }
+        }
+        
+        // Now sort alphabetically by company name
+        return uniqueProviders.sorted{ $0.companyName < $1.companyName }
+    }
+    
 
+    // MARK: Private Properties
+    
+    /// Whether or not the request params have changed since the last time we fetched results
+    fileprivate var requestHasChangedSinceLastFetch: Bool = false
+    
+    /**
+     The results of the last result fetch.  If none of the 'server based' search parameters have changed since the last result fetch, this will contain the results.  Note, this array will always contain the 'non-filtered' and 'non-ordered' search results.  The filtered and ordered results should be retrieved from the `fetchSearchResults(completion:)` method.
+     */
+    fileprivate var results:[RentalCar]?
+}
+
+
+// MARK: Private Methods
+private extension RentalSearchRequest {
+    
+    private func providerArray(_ providers: Array<RentalProvider>, contains provider: RentalProvider ) -> Bool
+    {
+        for existingProvider in providers {
+            if (existingProvider.isSameCompanyAs(rentalProvider: provider)) {
+                return true
+            }
+        }
+        return false
+    }
+    
     private func fetchAllSeachResults(completion: @escaping rentalSearchCompletionBlock)
     {
         // If we have saved valid results, no need to fetch from the server
         // If not, fetch the results from the server
-        print("[API]: Fetching all search results")
-        print("[API]: Server based params have changed: \(requestHasChangedSinceLastFetch)")
-        print("[API]: Current results count: \(results?.count ?? 0)")
-        
         if let resultsCopy = results, resultsCopy.count > 0, !requestHasChangedSinceLastFetch {
-            print("[API]: We have a valid cached result array, return that right away")
             completion(Result.success(resultsCopy))
         } else {
-            print("[API]: Refresh data from server")
             let search = CarRentalGeosearch()
             search.fetchResultsFor(searchRequest:self, completion: { response in
                 completion(response)
@@ -179,23 +197,12 @@ class RentalSearchRequest {
         }
     }
     
-    
-    /// Whether or not the request params have changed since the last time we fetched results
-    fileprivate var requestHasChangedSinceLastFetch: Bool = false
-    
-    /**
-     The results of the last result fetch.  If none of the 'server based' search parameters have changed since the last result fetch, this will contain the results.  Note, this array will always contain the 'non-filtered' and 'non-ordered' search results.  The filtered and ordered results should be retrieved from the fetchResults(:) method.
-     */
-    fileprivate var results:[RentalCar]?
-    
-    
-    /// Should be called anytime
     private func didChangeServerBasedSearchParameter()
     {
         requestHasChangedSinceLastFetch = true
         results = nil
     }
-
+    
     private func filteredAndSortedResults() -> Array<RentalCar>
     {
         guard let results = results else {
@@ -217,7 +224,7 @@ class RentalSearchRequest {
                 return $0.provider.isSameCompanyAs(rentalProvider: rentalProviderFilter)
             }
         }
-
+        
         return filteredArray
     }
     
@@ -229,10 +236,10 @@ class RentalSearchRequest {
         switch resultsOrderType {
             
         case ResultsOrderType.priceHighToLow:
-            orderedResults.sort {
+            orderedResults.sort{
                 let price1 = $0.price()
                 let price2 = $1.price()
-                
+                // If the prices are the same, order by proximity
                 if let centerPoint = centerPoint, price1 == price2 {
                     let distance1 = $0.provider.distanceAwayFrom(location: centerPoint.location!)
                     let distance2 = $1.provider.distanceAwayFrom(location: centerPoint.location!)
@@ -241,12 +248,12 @@ class RentalSearchRequest {
                     return $0.price() > $1.price()
                 }
             }
-        
+            
         case ResultsOrderType.priceLowToHigh:
             orderedResults.sort {
                 let price1 = $0.price()
                 let price2 = $1.price()
-                
+                // If the prices are the same, order by proximity
                 if let centerPoint = centerPoint, price1 == price2 {
                     let distance1 = $0.provider.distanceAwayFrom(location: centerPoint.location!)
                     let distance2 = $1.provider.distanceAwayFrom(location: centerPoint.location!)

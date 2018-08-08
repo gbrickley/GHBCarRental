@@ -10,11 +10,18 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+
 /// Block used to return fetched rental car options
 typealias rentalSearchCompletionBlock = (Result<[RentalCar]>) -> Void
 
+
 class CarRentalGeosearch {
     
+    /**
+     Retreieves search results for a given search request.
+     - Parameter searchRequest: The request to process.
+     - Parameter rentalSearchCompletionBlock: The block to be executed when the request finishes.
+     */
     public func fetchResultsFor(searchRequest: RentalSearchRequest, completion: @escaping rentalSearchCompletionBlock)
     {
         let urlString = "\(AmadeusAPIConstant.baseUrl)/cars/search-circle"
@@ -41,9 +48,6 @@ class CarRentalGeosearch {
         if let dropoffDate = searchRequest.dropOffDate {
             params["drop_off"] = dropoffDate.amadeusAPIFormattedDateTimeString()
         }
-        
-        print("[Rental API Request]: Url: \(url)")
-        print("[Rental API Request]: Params: \(params)")
 
         Alamofire.request(url, parameters: params).validate().responseJSON { response in
 
@@ -75,7 +79,9 @@ class CarRentalGeosearch {
             }
         }
     }
-    
+}
+
+private extension CarRentalGeosearch {
     
     private func rentalCarsFromJSON(_ json: JSON) -> Array<RentalCar>
     {
@@ -118,5 +124,4 @@ class CarRentalGeosearch {
             return nil
         }
     }
-    
 }

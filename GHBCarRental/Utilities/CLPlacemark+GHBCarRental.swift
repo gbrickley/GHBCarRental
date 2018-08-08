@@ -14,12 +14,6 @@ extension CLPlacemark {
     /// Adds a border to the view
     func briefDescription() -> String
     {
-        print("[CLPlacemark]: Name: \(String(describing: self.name))")
-        print("[CLPlacemark]: Sub: \(String(describing: self.subThoroughfare))")
-        print("[CLPlacemark]: Street: \(String(describing: self.thoroughfare))")
-        print("[CLPlacemark]: City: \(String(describing: self.locality))")
-        print("[CLPlacemark]: State: \(String(describing: self.administrativeArea))")
-        
         if let streetNum = self.subThoroughfare, let street = self.thoroughfare, let city = self.locality {
             return "\(streetNum) \(street) \(city)"
         } else if let name = self.name {
