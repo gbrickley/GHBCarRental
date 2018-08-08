@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0300254F211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300254E211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift */; };
+		03002552211A63FD00A6F574 /* RentalOptionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002551211A63FD00A6F574 /* RentalOptionDetailViewController.swift */; };
+		03002554211A674400A6F574 /* RentailOptionDetailViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002553211A674400A6F574 /* RentailOptionDetailViewFactory.swift */; };
 		03B091E0211793E300F07463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091DF211793E300F07463 /* AppDelegate.swift */; };
 		03B091E5211793E300F07463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E3211793E300F07463 /* Main.storyboard */; };
 		03B091E7211793E500F07463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E6211793E500F07463 /* Assets.xcassets */; };
@@ -60,6 +62,8 @@
 
 /* Begin PBXFileReference section */
 		0300254E211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcrissVehicleTypeDecoderTests.swift; sourceTree = "<group>"; };
+		03002551211A63FD00A6F574 /* RentalOptionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalOptionDetailViewController.swift; sourceTree = "<group>"; };
+		03002553211A674400A6F574 /* RentailOptionDetailViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentailOptionDetailViewFactory.swift; sourceTree = "<group>"; };
 		0301E4BAB03C2F17E7F54723 /* Pods-GHBCarRentalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		03608E954B89AD657E065482 /* Pods-GHBCarRentalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		03B091DC211793E300F07463 /* GHBCarRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHBCarRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				03B092F9211908CE00F07463 /* UserLocationManager.swift */,
+				03002553211A674400A6F574 /* RentailOptionDetailViewFactory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				03B092CE21179A4100F07463 /* SearchViewController.swift */,
+				03002551211A63FD00A6F574 /* RentalOptionDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -626,9 +632,11 @@
 				03B092FA211908CE00F07463 /* UserLocationManager.swift in Sources */,
 				03B092E02117C14B00F07463 /* Globals.swift in Sources */,
 				03B092D121179B7000F07463 /* RentalSearchRequest.swift in Sources */,
+				03002554211A674400A6F574 /* RentailOptionDetailViewFactory.swift in Sources */,
 				03B092FE2119384A00F07463 /* DateInterval+GHBCarRental.swift in Sources */,
 				03B092FC211910A800F07463 /* CLPlacemark+GHBCarRental.swift in Sources */,
 				03B092E22117E3AB00F07463 /* UnitConversions.swift in Sources */,
+				03002552211A63FD00A6F574 /* RentalOptionDetailViewController.swift in Sources */,
 				03B091E0211793E300F07463 /* AppDelegate.swift in Sources */,
 				03B092F32118EFA100F07463 /* UIView+GHBCarRental.swift in Sources */,
 				03B092F62118F0E700F07463 /* CarRentalOptionCell.swift in Sources */,

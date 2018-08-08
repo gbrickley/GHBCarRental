@@ -20,8 +20,8 @@ extension CLPlacemark {
         print("[CLPlacemark]: City: \(String(describing: self.locality))")
         print("[CLPlacemark]: State: \(String(describing: self.administrativeArea))")
         
-        if let streetNum = self.subThoroughfare, let street = self.thoroughfare, let city = self.locality, let state = self.administrativeArea {
-            return "\(streetNum) \(street) \(city), \(state)"
+        if let streetNum = self.subThoroughfare, let street = self.thoroughfare, let city = self.locality {
+            return "\(streetNum) \(street) \(city)"
         } else if let name = self.name {
             return name
         } else {

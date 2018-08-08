@@ -65,6 +65,28 @@ class SearchViewController: UIViewController {
         initialViewSetup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // If the user hasn't set a search location yet, grab their current location
+        print("Current search center: \(String(describing: searchRequest.centerPoint))")
+        if searchRequest.centerPoint == nil {
+            setSearchCenterToUsersCurrentLocation()
+        }
+    }
+    
+    func setSearchCenterToUsersCurrentLocation()
+    {
+        showLoadingViewWithMesage("Updating location...")
+        UserLocationManager.sharedInstance.fetchUsersCurrentLocation(completion: { placemark, error in
+            print("Location fetch did return!")
+            print(String(describing: placemark) )
+            print(String(describing: error) )
+            self.hideLoadingView()
+            if let placemark = placemark {
+                self.updateSearchCenterToPlacemark(placemark)
+            }
+        })
+    }
+    
     func setupDesign()
     {
         tableView.hideEmptyCells()
@@ -94,15 +116,8 @@ class SearchViewController: UIViewController {
         let locationPicker = LocationPickerViewController()
         
         // Set the starting location if we have one
-        var placemark: CLPlacemark?
-        if let centerPoint = searchRequest.centerPoint {
-            placemark = centerPoint
-        } else if let currentPlacemark = UserLocationManager.sharedInstance.usersCurrentPlacemark() {
-            placemark = currentPlacemark
-        }
-        
-        if let placemark = placemark {
-            locationPicker.location = Location(name: placemark.name, location: placemark.location, placemark: placemark)
+        if let placemark = searchRequest.centerPoint {
+            locationPicker.location = Location(name: placemark.briefDescription(), location: placemark.location, placemark: placemark)
         }
         
         locationPicker.showCurrentLocationButton = true
@@ -119,7 +134,9 @@ class SearchViewController: UIViewController {
             }
         }
         
-        navigationController?.pushViewController(locationPicker, animated: true)
+        let nav = UINavigationController(rootViewController: locationPicker)
+        self.present(nav, animated: true, completion: nil)
+        //navigationController?.pushViewController(locationPicker, animated: true)
     }
     
     func updateSearchCenterToPlacemark(_ placemark: CLPlacemark )
@@ -358,7 +375,7 @@ class SearchViewController: UIViewController {
     func refreshOptions()
     {
         print("Load search results!")
-        showLoadingView()
+        showLoadingViewWithMesage("Loading Options...")
         
         // Clear any old errors
         errorMessage = nil
@@ -396,19 +413,23 @@ class SearchViewController: UIViewController {
     
     // MARK: Loading View
     
-    func showLoadingView()
+    func showLoadingViewWithMesage(_ message: String?)
     {
         tableView.alpha = 0.2
+        if searchResults.count == 0 {
+            tableView.isHidden = true
+        }
         progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
         progressHUD?.bezelView.color = UIColor(red: 10/255, green: 196/255, blue: 186/255, alpha: 1.0)
         progressHUD?.bezelView.style = MBProgressHUDBackgroundStyle.solidColor;
         progressHUD?.contentColor = UIColor.white
-        progressHUD?.label.text = "Loading options..."
+        progressHUD?.label.text = message
     }
     
     func hideLoadingView()
     {
         tableView.alpha = 1.0
+        tableView.isHidden = false
         progressHUD?.hide(animated: true)
     }
     
@@ -447,17 +468,6 @@ class SearchViewController: UIViewController {
     {
         super.didReceiveMemoryWarning()
     }
-    
-    
-    // MARK: - User Interaction
-
-
-    
-
-    
-
-    
-
 }
 
 
@@ -481,10 +491,19 @@ extension SearchViewController: UITableViewDataSource {
         cell.descriptionLabel.text = "\(car.provider.companyName)"
         
         var details = "\(car.provider.streetAddress())"
+        
+        // TODO: FIX
+        /*
+        if let location = UserLocationManager.sharedInstance.usersCurrentLocation() {
+            let distance = car.provider.distanceAwayStringFrom(location: location)
+            details += " - \(distance) away"
+        }*/
+        
+        /*
         if let centerLocation = searchRequest.centerPoint?.location {
             let distance = car.provider.distanceAwayStringFrom(location: centerLocation)
              details += " - \(distance) away"
-        }
+        }*/
         
         cell.distanceAwayLabel.text = details
         return cell
@@ -492,9 +511,25 @@ extension SearchViewController: UITableViewDataSource {
     
     func presentDetailsForCar(_ car: RentalCar)
     {
-        print("Present details for car: \(car)")
+        showLoadingViewWithMesage(nil)
+        let detailView = RentailOptionDetailViewFactory().detailViewForCar(car, usingCenterPoint: searchRequest.centerPoint, andDelegate:self)
+        
+        self.present(detailView, animated: true, completion: {
+            self.hideLoadingView()
+        })
     }
 }
+
+
+// MARK: - Rental Details View Delegate
+extension SearchViewController: RentalOptionDetailViewDelegate {
+    
+    func rentalOptionsViewDidReuqestToClose(view: RentalOptionDetailViewController)
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
 
 // MARK: - Table View Delegate
 extension SearchViewController: UITableViewDelegate {
