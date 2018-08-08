@@ -514,7 +514,7 @@
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uuk-3c-1ag">
-                                <rect key="frame" x="12" y="38" width="32" height="32"/>
+                                <rect key="frame" x="12" y="32" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="0Vh-8h-8bh"/>
                                     <constraint firstAttribute="width" secondItem="uuk-3c-1ag" secondAttribute="height" multiplier="1:1" id="Fsj-gu-7bx"/>
@@ -533,7 +533,7 @@
                             <constraint firstItem="1op-MI-ghU" firstAttribute="leading" secondItem="7jb-Yr-DKy" secondAttribute="leading" id="Cau-ml-8Fr"/>
                             <constraint firstItem="1op-MI-ghU" firstAttribute="top" secondItem="ob2-Oh-jxs" secondAttribute="top" id="Vai-yj-CyV"/>
                             <constraint firstItem="1op-MI-ghU" firstAttribute="bottom" secondItem="7jb-Yr-DKy" secondAttribute="bottom" id="VgR-Un-CWP"/>
-                            <constraint firstItem="uuk-3c-1ag" firstAttribute="top" secondItem="7jb-Yr-DKy" secondAttribute="top" constant="18" id="eC2-RG-qeg"/>
+                            <constraint firstItem="uuk-3c-1ag" firstAttribute="top" secondItem="7jb-Yr-DKy" secondAttribute="top" constant="12" id="eC2-RG-qeg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7jb-Yr-DKy"/>
                     </view>

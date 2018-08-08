@@ -16,24 +16,6 @@ import EmptyDataSet_Swift
 
 class SearchViewController: UIViewController {
     
-    // View UI Elements
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchParamsContainerView: UIView!
-    
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var dateRangeLabel: UILabel!
-    
-    @IBOutlet weak var sortFilterContainerView: UIView!
-    @IBOutlet weak var sortFilterContainerViewHeight: NSLayoutConstraint!
-   
-    @IBOutlet weak var sortDescriptionContainerView: UIView!
-    @IBOutlet weak var sortOptionsButton: UIButton!
-    @IBOutlet weak var sortDescriptionLabel: UILabel!
-    
-    @IBOutlet weak var filterDescriptionContainerView: UIView!
-    @IBOutlet weak var filterOptionsButton: UIButton!
-    @IBOutlet weak var filterDescriptionLabel: UILabel!
-    
     // The search request is the main powerhouse of the view
     // It handles all search parameters and fetching results
     var searchRequest = RentalSearchRequest()
@@ -53,7 +35,96 @@ class SearchViewController: UIViewController {
     // The progress indicator we'll use when loading
     var progressHUD: MBProgressHUD?
     
-
+    // View UI Elements
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchParamsContainerView: UIView!
+    
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var dateRangeLabel: UILabel!
+    
+    @IBOutlet weak var sortFilterContainerView: UIView!
+    @IBOutlet weak var sortFilterContainerViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var sortDescriptionContainerView: UIView!
+    @IBOutlet weak var sortOptionsButton: UIButton!
+    @IBOutlet weak var sortDescriptionLabel: UILabel!
+    
+    @IBOutlet weak var filterDescriptionContainerView: UIView!
+    @IBOutlet weak var filterOptionsButton: UIButton!
+    @IBOutlet weak var filterDescriptionLabel: UILabel!
+    
+    // The theme we'll use for the date picker
+    private lazy var datePickerTheme: ThemeManager = {
+        var theme = ThemeManager()
+        theme.mainColor = UIColor(red: 241/255, green: 107/255, blue: 111/255, alpha: 1)
+        return theme
+    }()
+    
+    // These constants will help us recognize the picker views later on
+    fileprivate let orderTypePickerViewTag = 1
+    fileprivate let providerFilterPickerViewTag = 2
+    
+    // The hidden text field that we'll use to show the order picker view
+    lazy var orderTypeTextField: UITextField = {
+        
+        let textField = UITextField(frame: CGRect.zero)
+        textField.inputView = orderTypePickerView
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.black
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Set Order Type", style: .plain, target: self, action: #selector(self.didChangeOrderType(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.didCancelOrderTypePicker(_:)))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        textField.inputAccessoryView = toolBar
+        return textField
+    }()
+    
+    // The order picker view
+    lazy var orderTypePickerView: UIPickerView = {
+        let picker = UIPickerView()
+        picker.tag = orderTypePickerViewTag
+        picker.dataSource = self
+        picker.delegate = self
+        return picker
+    }()
+    
+    // The hidden text field that we'll use to show the provider picker view
+    lazy var providerFilterTextField: UITextField = {
+        
+        let textField = UITextField(frame: CGRect.zero)
+        textField.inputView = providerFilterPickerView
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.black
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Set Filter", style: .plain, target: self, action: #selector(self.didChangeProviderFilter(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.didCancelProviderFilter(_:)))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        textField.inputAccessoryView = toolBar
+        return textField
+    }()
+    
+    // The provider picker view
+    lazy var providerFilterPickerView: UIPickerView = {
+        let picker = UIPickerView()
+        picker.tag = providerFilterPickerViewTag
+        picker.dataSource = self
+        picker.delegate = self
+        return picker
+    }()
+    
+    
+    // MARK: View Override Methods
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -72,6 +143,18 @@ class SearchViewController: UIViewController {
             setSearchCenterToUsersCurrentLocation()
         }
     }
+ 
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+    }
+}
+
+
+// MARK: - Private Methods
+private extension SearchViewController {
+    
+    // MARK: View Setup
     
     func setupDesign()
     {
@@ -92,80 +175,115 @@ class SearchViewController: UIViewController {
     }
     
     
-    // MARK: - Search Location
+    // MARK: Loading Options
     
-    func setSearchCenterToUsersCurrentLocation()
+    func didEditSearchParameter()
     {
-        showLoadingViewWithMesage("Updating location...")
-        UserLocationManager.sharedInstance.fetchUsersCurrentLocation(completion: { placemark, error in
-            print("Did retrieve users location.")
-            self.hideLoadingView()
-            if let placemark = placemark {
-                self.updateSearchCenterToPlacemark(placemark)
+        if searchRequest.isValid() {
+            refreshOptions()
+        }
+    }
+    
+    func refreshOptions()
+    {
+        showLoadingViewWithMesage("Loading Options...")
+        
+        // Clear any old errors
+        errorMessage = nil
+        
+        searchRequest.fetchSearchResults(completion: { result in
+            
+            switch result {
+                
+            case .success(let cars):
+                self.searchResults = cars
+                self.providerFilterOptions = self.searchRequest.rentalProviderFilterOptions()
+                
+            case .error(let code, let description, let moreInfo):
+                print("Error [\(code)]: \(description). \(moreInfo)")
+                self.errorMessage = description
             }
+            
+            self.tableView.reloadData()
+            self.scrollTableViewToTop(animated: false)
+            self.setSortFilterDisplayState()
+            self.setMapButtonDisplayState()
+            self.hideLoadingView()
         })
     }
     
-    @IBAction func didRequestToEditLocation(_ sender: Any) {
-        presentLocationPicker()
-    }
     
-    func presentLocationPicker()
-    {
-        let locationPicker = LocationPickerViewController()
-        
-        // Set the starting location if we have one
-        if let placemark = searchRequest.centerPoint {
-            locationPicker.location = Location(name: placemark.briefDescription(), location: placemark.location, placemark: placemark)
-        }
-        
-        locationPicker.showCurrentLocationButton = true
-        locationPicker.showCurrentLocationInitially = true
-        locationPicker.mapType = .mutedStandard
-        locationPicker.useCurrentLocationAsHint = true
-        locationPicker.searchBarPlaceholder = "Search Location"
-        locationPicker.searchHistoryLabel = "Previous Locations"
-        locationPicker.resultRegionDistance = 600
-        
-        locationPicker.completion = { location in
-            if let location = location {
-                self.updateSearchCenterToPlacemark(location.placemark)
-            }
-        }
-
-        navigationController?.pushViewController(locationPicker, animated: true)
-    }
+    // MARK: - Map View
     
-    func updateSearchCenterToPlacemark(_ placemark: CLPlacemark )
+    func setMapButtonDisplayState()
     {
-        searchRequest.centerPoint = placemark
-        updateLocationLabel()
-        didEditSearchParameter()
-    }
-    
-    func updateLocationLabel()
-    {
-        if let location = searchRequest.centerPoint {
-            locationLabel.text = location.briefDescription()
+        if searchResults.count > 0 {
+            let image = UIImage.init(named: "map-icon")!.withRenderingMode(.alwaysOriginal)
+            let mapButton = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.didRequestToViewMap(_:)))
+            self.navigationItem.rightBarButtonItem = mapButton
         } else {
-            locationLabel.text = "Set Search Location"
+            self.navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    @objc func didRequestToViewMap(_ sender: UIBarButtonItem)
+    {
+        showLoadingViewWithMesage(nil)
+        
+        let mapView = MapViewFactory().mapViewForCars(searchResults, usingCenterPoint: searchRequest.centerPoint, withPickupDate: searchRequest.pickUpDate, dropoffDate: searchRequest.dropOffDate, andDelegate: self)
+        
+        self.present(mapView, animated: true, completion: {
+            self.hideLoadingView()
+        })
+    }
+    
+    
+    // MARK: Show / Hide Sort and Filter
+    
+    func setSortFilterDisplayState()
+    {
+        if (providerFilterOptions.count == 0) {
+            filterDescriptionContainerView.isHidden = true
+            filterOptionsButton.isUserInteractionEnabled = false
+        } else {
+            filterDescriptionContainerView.isHidden = false
+            filterOptionsButton.isUserInteractionEnabled = true
         }
     }
     
     
-    // MARK: - Search Date Range
+    // MARK: Loading View
     
+    func showLoadingViewWithMesage(_ message: String?)
+    {
+        tableView.alpha = 0.2
+        if searchResults.count == 0 {
+            tableView.isHidden = true
+        }
+        progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
+        progressHUD?.bezelView.color = UIColor(red: 10/255, green: 196/255, blue: 186/255, alpha: 1.0)
+        progressHUD?.bezelView.style = MBProgressHUDBackgroundStyle.solidColor;
+        progressHUD?.contentColor = UIColor.white
+        progressHUD?.label.text = message
+    }
+    
+    func hideLoadingView()
+    {
+        tableView.alpha = 1.0
+        tableView.isHidden = false
+        progressHUD?.hide(animated: true)
+    }
+}
+
+
+// MARK: - Search Date Range
+private extension SearchViewController {
+
     @IBAction func didRequestToEditDateRange(_ sender: Any)
     {
         presentDateRangePicker()
     }
-    
-    private lazy var datePickerTheme: ThemeManager = {
-        var theme = ThemeManager()
-        theme.mainColor = UIColor(red: 241/255, green: 107/255, blue: 111/255, alpha: 1)
-        return theme
-    }()
-    
+
     func presentDateRangePicker()
     {
         AirbnbDatePicker.ThemeManager.current = datePickerTheme
@@ -207,10 +325,12 @@ class SearchViewController: UIViewController {
             return nil
         }
     }
-    
-    
-    // MARK: - Order Type
-    
+}
+
+
+// MARK: - Order Type
+private extension SearchViewController {
+
     @IBAction func didRequestToEditSortType(_ sender: Any)
     {
         presentOrderTypePicker()
@@ -221,36 +341,6 @@ class SearchViewController: UIViewController {
         orderTypeTextField.becomeFirstResponder()
     }
     
-    // This constant will help us recognize the picker view later on
-    fileprivate let orderTypePickerViewTag = 1
-    
-    lazy var orderTypeTextField: UITextField = {
-        
-        let textField = UITextField(frame: CGRect.zero)
-        textField.inputView = orderTypePickerView
-        
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.black
-        toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Set Order Type", style: .plain, target: self, action: #selector(self.didChangeOrderType(_:)))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.didCancelOrderTypePicker(_:)))
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        textField.inputAccessoryView = toolBar
-        return textField
-    }()
-    
-    lazy var orderTypePickerView: UIPickerView = {
-        let picker = UIPickerView()
-        picker.tag = orderTypePickerViewTag
-        picker.dataSource = self
-        picker.delegate = self
-        return picker
-    }()
-
     @objc func didChangeOrderType(_ picker: UIPickerView)
     {
         orderTypeTextField.resignFirstResponder()
@@ -276,63 +366,13 @@ class SearchViewController: UIViewController {
     {
         sortDescriptionLabel.text = friendlyDescriptionForOrderType(searchRequest.resultsOrderType)
     }
-    
-    
-    // MARK: - Map View
-    
-    func setMapButtonDisplayState()
-    {
-        if searchResults.count > 0 {
-            let image = UIImage.init(named: "map-icon")!.withRenderingMode(.alwaysOriginal)
-            let mapButton = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.didRequestToViewMap(_:)))
-            self.navigationItem.rightBarButtonItem = mapButton
-        } else {
-            self.navigationItem.rightBarButtonItem = nil
-        }
-    }
-    
-    @objc func didRequestToViewMap(_ sender: UIBarButtonItem)
-    {
-        showLoadingViewWithMesage(nil)
-        
-        let mapView = MapViewFactory().mapViewForCars(searchResults, usingCenterPoint: searchRequest.centerPoint, withPickupDate: searchRequest.pickUpDate, dropoffDate: searchRequest.dropOffDate, andDelegate: self)
+}
 
-        self.present(mapView, animated: true, completion: {
-            self.hideLoadingView()
-        })
-    }
+
+// MARK: -
+private extension SearchViewController {
     
     // MARK: - Provider Filter
-    
-    // This constant will help us recognize the picker view later on
-    fileprivate let providerFilterPickerViewTag = 2
-    
-    lazy var providerFilterTextField: UITextField = {
-        
-        let textField = UITextField(frame: CGRect.zero)
-        textField.inputView = providerFilterPickerView
-        
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.black
-        toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Set Filter", style: .plain, target: self, action: #selector(self.didChangeProviderFilter(_:)))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.didCancelProviderFilter(_:)))
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        textField.inputAccessoryView = toolBar
-        return textField
-    }()
-    
-    lazy var providerFilterPickerView: UIPickerView = {
-        let picker = UIPickerView()
-        picker.tag = providerFilterPickerViewTag
-        picker.dataSource = self
-        picker.delegate = self
-        return picker
-    }()
     
     @IBAction func didRequestToEditFilter(_ sender: Any)
     {
@@ -384,113 +424,68 @@ class SearchViewController: UIViewController {
             filterDescriptionLabel.text = "Filter by Company"
         }
     }
+}
+
+
+// MARK: - Search Location
+private extension SearchViewController {
     
-    
-    // MARK: - Loading Data
-    
-    func didEditSearchParameter()
-    {
-        if searchRequest.isValid() {
-            refreshOptions()
-        }
+    @IBAction func didRequestToEditLocation(_ sender: Any) {
+        presentLocationPicker()
     }
     
-    func refreshOptions()
+    func setSearchCenterToUsersCurrentLocation()
     {
-        print("Load search results!")
-        showLoadingViewWithMesage("Loading Options...")
-        
-        // Clear any old errors
-        errorMessage = nil
-        
-        searchRequest.fetchSearchResults(completion: { result in
-            
-            switch result {
-                
-            case .success(let cars):
-                print("Found \(cars.count) options:")
-                self.searchResults = cars
-                self.providerFilterOptions = self.searchRequest.rentalProviderFilterOptions()
-                
-            case .error(let code, let description, let moreInfo):
-                print("Error [\(code)]: \(description). \(moreInfo)")
-                self.errorMessage = description
-            }
-            
-            self.tableView.reloadData()
-            self.scrollTableViewToTop(animated: false)
-            self.setSortFilterDisplayState()
-            self.setMapButtonDisplayState()
+        showLoadingViewWithMesage("Updating location...")
+        UserLocationManager.sharedInstance.fetchUsersCurrentLocation(completion: { placemark, error in
+            print("Did retrieve users location.")
             self.hideLoadingView()
+            if let placemark = placemark {
+                self.updateSearchCenterToPlacemark(placemark)
+            }
         })
     }
-    
-    func scrollTableViewToTop(animated: Bool)
+
+    func presentLocationPicker()
     {
-        print("Scroll to top")
-        if (searchResults.count > 0) {
-            let indexPath = IndexPath(row: 0, section: 0)
-            tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+        let locationPicker = LocationPickerViewController()
+        
+        // Set the starting location if we have one
+        if let placemark = searchRequest.centerPoint {
+            locationPicker.location = Location(name: placemark.briefDescription(), location: placemark.location, placemark: placemark)
         }
-    }
-    
-    
-    // MARK: Loading View
-    
-    func showLoadingViewWithMesage(_ message: String?)
-    {
-        tableView.alpha = 0.2
-        if searchResults.count == 0 {
-            tableView.isHidden = true
+        
+        locationPicker.showCurrentLocationButton = true
+        locationPicker.showCurrentLocationInitially = true
+        locationPicker.mapType = .mutedStandard
+        locationPicker.useCurrentLocationAsHint = true
+        locationPicker.searchBarPlaceholder = "Search Location"
+        locationPicker.searchHistoryLabel = "Previous Locations"
+        locationPicker.resultRegionDistance = 600
+        
+        locationPicker.completion = { location in
+            if let location = location {
+                self.updateSearchCenterToPlacemark(location.placemark)
+            }
         }
-        progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
-        progressHUD?.bezelView.color = UIColor(red: 10/255, green: 196/255, blue: 186/255, alpha: 1.0)
-        progressHUD?.bezelView.style = MBProgressHUDBackgroundStyle.solidColor;
-        progressHUD?.contentColor = UIColor.white
-        progressHUD?.label.text = message
+        
+        navigationController?.pushViewController(locationPicker, animated: true)
     }
     
-    func hideLoadingView()
+    func updateSearchCenterToPlacemark(_ placemark: CLPlacemark )
     {
-        tableView.alpha = 1.0
-        tableView.isHidden = false
-        progressHUD?.hide(animated: true)
+        searchRequest.centerPoint = placemark
+        updateLocationLabel()
+        didEditSearchParameter()
     }
     
-    
-    // MARK: - Show / Hide Sort and Filter
-    
-    let sortFilterContainerViewDefaultHeight:CGFloat = 36
-    
-    func setSortFilterDisplayState()
+    func updateLocationLabel()
     {
-        if (providerFilterOptions.count == 0) {
-            filterDescriptionContainerView.isHidden = true
-            filterOptionsButton.isUserInteractionEnabled = false
+        if let location = searchRequest.centerPoint {
+            locationLabel.text = location.briefDescription()
         } else {
-            filterDescriptionContainerView.isHidden = false
-            filterOptionsButton.isUserInteractionEnabled = true
+            locationLabel.text = "Set Search Location"
         }
-    }
-    
-    func showSortFilterSection()
-    {
-        sortFilterContainerView.isHidden = false
-        sortFilterContainerViewHeight.constant = sortFilterContainerViewDefaultHeight
-    }
-    
-    func hideSortFilterSection()
-    {
-        sortFilterContainerView.isHidden = true
-        sortFilterContainerViewHeight.constant = 0
-    }
-
-    
-    
-
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
     }
 }
 
@@ -551,6 +546,14 @@ extension SearchViewController: RentalOptionDetailViewDelegate {
     func rentalOptionsViewDidRequestToClose(view: RentalOptionDetailViewController)
     {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func scrollTableViewToTop(animated: Bool)
+    {
+        if (searchResults.count > 0) {
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+        }
     }
 }
 
