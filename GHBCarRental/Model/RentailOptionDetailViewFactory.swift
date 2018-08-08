@@ -12,13 +12,15 @@ import CoreLocation
 
 class RentailOptionDetailViewFactory {
     
-    public func detailViewForCar(_ car: RentalCar, usingCenterPoint centerPoint: CLPlacemark?, andDelegate delegate: RentalOptionDetailViewDelegate) -> RentalOptionDetailViewController
+    public func detailViewForCar(_ car: RentalCar, usingCenterPoint centerPoint: CLPlacemark?, withPickupDate pickupDate: Date?, dropoffDate: Date?, andDelegate delegate: RentalOptionDetailViewDelegate) -> RentalOptionDetailViewController
     {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "RentalOptionDetailViewController") as! RentalOptionDetailViewController
         vc.car = car
         vc.delegate = delegate
         vc.centerPoint = centerPoint
+        vc.pickupDate = pickupDate
+        vc.dropoffDate = dropoffDate
         return vc
     }
 }

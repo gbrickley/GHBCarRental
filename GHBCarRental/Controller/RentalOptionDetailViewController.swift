@@ -15,7 +15,7 @@ import MapKit
 
 protocol RentalOptionDetailViewDelegate: class {
     // Called when the rental option detail view wants to close
-    func rentalOptionsViewDidReuqestToClose(view: RentalOptionDetailViewController)
+    func rentalOptionsViewDidRequestToClose(view: RentalOptionDetailViewController)
 }
 
 class RentalOptionDetailViewController: UIViewController {
@@ -31,8 +31,11 @@ class RentalOptionDetailViewController: UIViewController {
     // The users center point.  We'll use this location when showing directions.
     var centerPoint: CLPlacemark?
     
+    // The rentals pickup date
+    var pickupDate: Date?
     
-    var mapView = MKMapView()
+    // The rentals dropoff date
+    var dropoffDate: Date?
     
     // UI Elements
     @IBOutlet weak var carImageView: UIImageView!
@@ -41,6 +44,9 @@ class RentalOptionDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var distanceAwayLabel: UILabel!
     @IBOutlet weak var fullDescriptionLabel: UILabel!
+    
+    @IBOutlet weak var pickupLabel: UILabel!
+    @IBOutlet weak var dropoffLabel: UILabel!
     
     @IBOutlet weak var featureContainer1: UIView!
     @IBOutlet weak var featureLabel1: UILabel!
@@ -68,6 +74,8 @@ class RentalOptionDetailViewController: UIViewController {
         setFeatures(car.features())
         setFullDescriptionText()
         descriptionLabel.text = "\(car.provider.companyName)"
+        pickupLabel.text = pickupDate?.briefDateStringWithDateTimeSepatingString("after") ?? "TBD"
+        dropoffLabel.text = dropoffDate?.briefDateStringWithDateTimeSepatingString("before") ?? "TBD"
         
         var details = "\(car.provider.streetAddress())"
         
@@ -118,16 +126,9 @@ class RentalOptionDetailViewController: UIViewController {
         fullDescriptionLabel.text = descrip
     }
     
-    func presentNavigationOptions()
-    {
-        // Give the user the option to navigate from the chosen center point or from their current location
-        
-        print("Present navigation.")
-    }
-    
     func close()
     {
-        delegate.rentalOptionsViewDidReuqestToClose(view: self)
+        delegate.rentalOptionsViewDidRequestToClose(view: self)
     }
     
 

@@ -10,6 +10,9 @@
 		0300254F211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300254E211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift */; };
 		03002552211A63FD00A6F574 /* RentalOptionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002551211A63FD00A6F574 /* RentalOptionDetailViewController.swift */; };
 		03002554211A674400A6F574 /* RentailOptionDetailViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002553211A674400A6F574 /* RentailOptionDetailViewFactory.swift */; };
+		03002557211B55F200A6F574 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002556211B55F200A6F574 /* MapViewController.swift */; };
+		03002559211B561700A6F574 /* MapViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002558211B561700A6F574 /* MapViewFactory.swift */; };
+		0300255C211B5EEB00A6F574 /* RentalCarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300255B211B5EEB00A6F574 /* RentalCarAnnotation.swift */; };
 		03B091E0211793E300F07463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091DF211793E300F07463 /* AppDelegate.swift */; };
 		03B091E5211793E300F07463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E3211793E300F07463 /* Main.storyboard */; };
 		03B091E7211793E500F07463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E6211793E500F07463 /* Assets.xcassets */; };
@@ -64,6 +67,9 @@
 		0300254E211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcrissVehicleTypeDecoderTests.swift; sourceTree = "<group>"; };
 		03002551211A63FD00A6F574 /* RentalOptionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalOptionDetailViewController.swift; sourceTree = "<group>"; };
 		03002553211A674400A6F574 /* RentailOptionDetailViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentailOptionDetailViewFactory.swift; sourceTree = "<group>"; };
+		03002556211B55F200A6F574 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		03002558211B561700A6F574 /* MapViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewFactory.swift; sourceTree = "<group>"; };
+		0300255B211B5EEB00A6F574 /* RentalCarAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCarAnnotation.swift; sourceTree = "<group>"; };
 		0301E4BAB03C2F17E7F54723 /* Pods-GHBCarRentalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		03608E954B89AD657E065482 /* Pods-GHBCarRentalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		03B091DC211793E300F07463 /* GHBCarRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHBCarRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +143,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0300255A211B5ECA00A6F574 /* Annotation Views */ = {
+			isa = PBXGroup;
+			children = (
+				0300255B211B5EEB00A6F574 /* RentalCarAnnotation.swift */,
+			);
+			path = "Annotation Views";
+			sourceTree = "<group>";
+		};
 		03B091D3211793E300F07463 = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +217,7 @@
 			children = (
 				03B092F9211908CE00F07463 /* UserLocationManager.swift */,
 				03002553211A674400A6F574 /* RentailOptionDetailViewFactory.swift */,
+				03002558211B561700A6F574 /* MapViewFactory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +228,7 @@
 				03B091E3211793E300F07463 /* Main.storyboard */,
 				03B091E8211793E500F07463 /* LaunchScreen.storyboard */,
 				03B092F42118F0CF00F07463 /* Table Cells */,
+				0300255A211B5ECA00A6F574 /* Annotation Views */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,6 +238,7 @@
 			children = (
 				03B092CE21179A4100F07463 /* SearchViewController.swift */,
 				03002551211A63FD00A6F574 /* RentalOptionDetailViewController.swift */,
+				03002556211B55F200A6F574 /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -623,15 +640,18 @@
 			files = (
 				03B092DB2117B8BB00F07463 /* RentalCar.swift in Sources */,
 				03B092D92117B26C00F07463 /* RentalProvider.swift in Sources */,
+				0300255C211B5EEB00A6F574 /* RentalCarAnnotation.swift in Sources */,
 				03B092E52117E52B00F07463 /* Date+Amadeus.swift in Sources */,
 				03B092F82118F1DF00F07463 /* UITableView+GHBCarRental.swift in Sources */,
 				03B092CF21179A4100F07463 /* SearchViewController.swift in Sources */,
 				03B092DE2117C11200F07463 /* CarRentalGeosearch.swift in Sources */,
 				03B092F12118D6B400F07463 /* Double+Amadeus.swift in Sources */,
+				03002559211B561700A6F574 /* MapViewFactory.swift in Sources */,
 				03B0930021193EC900F07463 /* Date+GHBCarRental.swift in Sources */,
 				03B092FA211908CE00F07463 /* UserLocationManager.swift in Sources */,
 				03B092E02117C14B00F07463 /* Globals.swift in Sources */,
 				03B092D121179B7000F07463 /* RentalSearchRequest.swift in Sources */,
+				03002557211B55F200A6F574 /* MapViewController.swift in Sources */,
 				03002554211A674400A6F574 /* RentailOptionDetailViewFactory.swift in Sources */,
 				03B092FE2119384A00F07463 /* DateInterval+GHBCarRental.swift in Sources */,
 				03B092FC211910A800F07463 /* CLPlacemark+GHBCarRental.swift in Sources */,

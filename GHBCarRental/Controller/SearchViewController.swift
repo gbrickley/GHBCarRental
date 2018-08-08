@@ -34,7 +34,6 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var filterOptionsButton: UIButton!
     @IBOutlet weak var filterDescriptionLabel: UILabel!
     
-    
     // The search request is the main powerhouse of the view
     // It handles all search parameters and fetching results
     var searchRequest = RentalSearchRequest()
@@ -51,7 +50,7 @@ class SearchViewController: UIViewController {
     // This array will hold available 'provider' filters that the user can choose from
     var providerFilterOptions = [RentalProvider]()
         
-    // The progress indicator we'll use when loading options
+    // The progress indicator we'll use when loading
     var progressHUD: MBProgressHUD?
     
 
@@ -89,6 +88,7 @@ class SearchViewController: UIViewController {
         updateOrderTypeLabel()
         updateProviderFilterLabel()
         setSortFilterDisplayState()
+        setMapButtonDisplayState()
     }
     
     
@@ -98,6 +98,7 @@ class SearchViewController: UIViewController {
     {
         showLoadingViewWithMesage("Updating location...")
         UserLocationManager.sharedInstance.fetchUsersCurrentLocation(completion: { placemark, error in
+            print("Did retrieve users location.")
             self.hideLoadingView()
             if let placemark = placemark {
                 self.updateSearchCenterToPlacemark(placemark)
@@ -170,9 +171,9 @@ class SearchViewController: UIViewController {
         AirbnbDatePicker.ThemeManager.current = datePickerTheme
         
         // By default, we'll show 1 year
-        let dateInterval = DateInterval(start: Date(), duration: 86400*365)
+        let dateInterval = DateInterval(start: Date(), duration: 60*60*24*365)
         
-        // If the user has set the pickup and dropoff dates already show them now
+        // If the user has set the pickup and dropoff dates already set them now
         var selectedDateInterval: DateInterval?
         if let interval = currentDateInterval() {
             selectedDateInterval = interval
@@ -181,10 +182,10 @@ class SearchViewController: UIViewController {
         dp.presentDatePickerViewController(dateInterval: dateInterval, selectedDateInterval: selectedDateInterval, delegate: self)
     }
     
-    func updateDateRangeWithInterval(_ interval: DateInterval)
+    func updateDateRangeWith(pickup: Date, and dropoff: Date)
     {
-        searchRequest.pickUpDate = interval.start
-        searchRequest.dropOffDate = interval.end
+        searchRequest.pickUpDate = pickup
+        searchRequest.dropOffDate = dropoff
         updateDateRangeLabel()
         didEditSearchParameter()
     }
@@ -220,7 +221,8 @@ class SearchViewController: UIViewController {
         orderTypeTextField.becomeFirstResponder()
     }
     
-    let orderTypePickerViewTag = 1
+    // This constant will help us recognize the picker view later on
+    fileprivate let orderTypePickerViewTag = 1
     
     lazy var orderTypeTextField: UITextField = {
         
@@ -238,7 +240,6 @@ class SearchViewController: UIViewController {
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         textField.inputAccessoryView = toolBar
-        
         return textField
     }()
     
@@ -259,7 +260,8 @@ class SearchViewController: UIViewController {
         }
     }
     
-    @objc func didCancelOrderTypePicker(_ picker: UIPickerView) {
+    @objc func didCancelOrderTypePicker(_ picker: UIPickerView)
+    {
         orderTypeTextField.resignFirstResponder()
     }
     
@@ -276,9 +278,34 @@ class SearchViewController: UIViewController {
     }
     
     
+    // MARK: - Map View
     
-    // MARK: Provider Filter
-    let providerFilterPickerViewTag = 2
+    func setMapButtonDisplayState()
+    {
+        if searchResults.count > 0 {
+            let image = UIImage.init(named: "map-icon")!.withRenderingMode(.alwaysOriginal)
+            let mapButton = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.didRequestToViewMap(_:)))
+            self.navigationItem.rightBarButtonItem = mapButton
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    @objc func didRequestToViewMap(_ sender: UIBarButtonItem)
+    {
+        showLoadingViewWithMesage(nil)
+        
+        let mapView = MapViewFactory().mapViewForCars(searchResults, usingCenterPoint: searchRequest.centerPoint, withPickupDate: searchRequest.pickUpDate, dropoffDate: searchRequest.dropOffDate, andDelegate: self)
+
+        self.present(mapView, animated: true, completion: {
+            self.hideLoadingView()
+        })
+    }
+    
+    // MARK: - Provider Filter
+    
+    // This constant will help us recognize the picker view later on
+    fileprivate let providerFilterPickerViewTag = 2
     
     lazy var providerFilterTextField: UITextField = {
         
@@ -296,7 +323,6 @@ class SearchViewController: UIViewController {
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         textField.inputAccessoryView = toolBar
-        
         return textField
     }()
     
@@ -308,8 +334,8 @@ class SearchViewController: UIViewController {
         return picker
     }()
     
-    
-    @IBAction func didRequestToEditFilter(_ sender: Any) {
+    @IBAction func didRequestToEditFilter(_ sender: Any)
+    {
         presentProviderFilterPicker()
     }
     
@@ -338,7 +364,8 @@ class SearchViewController: UIViewController {
         }
     }
     
-    @objc func didCancelProviderFilter(_ picker: UIPickerView) {
+    @objc func didCancelProviderFilter(_ picker: UIPickerView)
+    {
         providerFilterTextField.resignFirstResponder()
     }
     
@@ -393,6 +420,7 @@ class SearchViewController: UIViewController {
             self.tableView.reloadData()
             self.scrollTableViewToTop(animated: false)
             self.setSortFilterDisplayState()
+            self.setMapButtonDisplayState()
             self.hideLoadingView()
         })
     }
@@ -507,7 +535,8 @@ extension SearchViewController: UITableViewDataSource {
     func presentDetailsForCar(_ car: RentalCar)
     {
         showLoadingViewWithMesage(nil)
-        let detailView = RentailOptionDetailViewFactory().detailViewForCar(car, usingCenterPoint: searchRequest.centerPoint, andDelegate:self)
+        
+        let detailView = RentailOptionDetailViewFactory().detailViewForCar(car, usingCenterPoint: searchRequest.centerPoint, withPickupDate: searchRequest.pickUpDate, dropoffDate: searchRequest.dropOffDate, andDelegate:self)
         
         self.present(detailView, animated: true, completion: {
             self.hideLoadingView()
@@ -519,7 +548,16 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - Rental Details View Delegate
 extension SearchViewController: RentalOptionDetailViewDelegate {
     
-    func rentalOptionsViewDidReuqestToClose(view: RentalOptionDetailViewController)
+    func rentalOptionsViewDidRequestToClose(view: RentalOptionDetailViewController)
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - Map View Delegate
+extension SearchViewController: MapViewDelegate {
+    
+    func mapViewDidRequestToClose(view: MapViewController)
     {
         self.dismiss(animated: true, completion: nil)
     }
@@ -541,7 +579,21 @@ extension SearchViewController: AirbnbDatePickerViewControllerDelegate {
     func datePickerController(_ picker: AirbnbDatePickerViewController, didFinishPicking dateInterval: DateInterval?)
     {
         if let interval = dateInterval {
-            updateDateRangeWithInterval(interval)
+            
+            print("[Date]: Initial pickup: \(interval.start)")
+            
+            // TODO: Set property time values here
+            let pickup = interval.start.dateWithUpdatedTime(hour: DefaultDates.defaultPickupTimeHours, min: DefaultDates.defaultPickupTimeMinutes)
+            print("[Date]: Updated pickup: \(pickup)")
+            
+            print("[Date]: Initial dropoff: \(interval.end)")
+            let dropoff = interval.end.dateWithUpdatedTime(hour: DefaultDates.defaultDropoffTimeHours, min: DefaultDates.defaultDropoffTimeMinutes)
+            print("[Date]: Updated dropoff: \(dropoff)")
+            
+            updateDateRangeWith(pickup: pickup, and: dropoff)
+            
+            //let date = Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!
+            //updateDateRangeWithInterval(interval)
         }
     }
 }

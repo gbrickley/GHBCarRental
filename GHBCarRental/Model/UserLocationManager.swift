@@ -21,7 +21,7 @@ class UserLocationManager: NSObject {
     // How accurately we want to grab the users location
     var locationAccuracy: CLLocationAccuracy = kCLLocationAccuracyHundredMeters
     
-    // Before we ask for location permission in
+    // Before we ask for location permission, we will prompt the user with a pre-auth message
     var preAuthorizationMessage: String = Strings.locationPreAuthorizationMessage
     
     // Store a reference to the callback block to execute once we grab the users location
@@ -31,7 +31,7 @@ class UserLocationManager: NSObject {
     typealias UserLocationCompletionBlock = (_ currentLocation: CLPlacemark?, _ error: String?) -> Void
     
     
-    // MARK: Public Methods
+    // MARK: - Public Methods
     
     /**
      Attempts to retrieve the users current location.
@@ -51,7 +51,7 @@ class UserLocationManager: NSObject {
     }
     
     /**
-     Presents directions to a given coordinate in the Maps app.
+     Presents driving directions to a given coordinate in the Maps app.
      - Parameter place: A description of the location we'll be directing to.
      - Parameter coordinate: The coordinate of the destination to direct to.
      */
@@ -81,7 +81,6 @@ private extension UserLocationManager {
     
     private func handleAuthorizationStatus(_ status: CLAuthorizationStatus)
     {
-        print("[Location Manager]: Handle auth status: \(status)")
         switch status {
         case .notDetermined:
             requestAuthorizationToAccessUsersLocation()
@@ -100,14 +99,11 @@ private extension UserLocationManager {
     
     private func startUpdatingUsersLocation()
     {
-        print("[Location Manager]: Start updating users location!")
         locationManager.startUpdatingLocation()
     }
     
     private func returnUsersLocation(_ location: CLPlacemark)
     {
-        print("[Location Manager]: Return with location: \(location)")
-        print("[Location Manager]: Callback block: \(String(describing: locationFetchCallback))")
         if let callback = locationFetchCallback {
             callback(location,nil)
             locationFetchCallback = nil
@@ -116,8 +112,6 @@ private extension UserLocationManager {
     
     private func returnUsersLocationWithError(_ error: String)
     {
-        print("[Location Manager]: Return with error: \(error)")
-        print("[Location Manager]: Callback block: \(String(describing: locationFetchCallback))")
         if let callback = locationFetchCallback {
             callback(nil,error)
             locationFetchCallback = nil
@@ -130,8 +124,6 @@ private extension UserLocationManager {
         
         // Look up the location and pass it to the completion handler
         geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
-            
-            print("[Location Manager]: Did retrieve geocoded location: \(String(describing: placemarks))")
             if let placemarks = placemarks, placemarks.count > 0 {
                 let placemark = placemarks[0]
                 self.returnUsersLocation(placemark)
@@ -142,17 +134,16 @@ private extension UserLocationManager {
     }
 }
 
-
+// MARK: - CLLocationManagerDelegate
 extension UserLocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
-        print("[Location Manager]: Did change authorization status: \(status)")
         handleAuthorizationStatus(status)
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("[Location Manager]: Did update location: \(locations)")
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
         let lastLocation = locations.last!
         retrievePlacemarkFromLocation(lastLocation)
         
@@ -163,7 +154,6 @@ extension UserLocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
-        print("[Location Manager]: Did fail with error: \(error)")
         returnUsersLocationWithError(error.localizedDescription)
     }
 }
