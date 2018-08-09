@@ -27,6 +27,6 @@ struct DefaultDates {
 }
 
 struct Strings {
-    // The message we'll display to the user before we actually ask for permission to their location
+    // The message we'll display to the user before we actually ask for permission to use their location
     static let locationPreAuthorizationMessage = "GHBCarRental would like to access you location so that we can tailor your searches to your current location."
 }
