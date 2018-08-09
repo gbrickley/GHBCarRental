@@ -1,0 +1,597 @@
+{
+  "results" : [ {
+    "provider" : {
+      "company_code" : "ZD",
+      "company_name" : "BUDGET"
+    },
+    "branch_id" : "IFPT01",
+    "location" : {
+      "latitude" : 35.16553,
+      "longitude" : -114.55673
+    },
+    "airport" : "IFP",
+    "address" : {
+      "line1" : "LAUGHLIN/BULLHEAD INT L APO",
+      "city" : "BULLHEAD CITY",
+      "region" : "AZ",
+      "country" : "US"
+    },
+    "cars" : [ {
+      "vehicle_info" : {
+        "acriss_code" : "ECAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Economy",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "33.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "91.26",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "CCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Compact",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "34.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "93.77",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "ICAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Intermediate",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "36.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "98.78",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "FCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Fullsize",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "41.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "111.32",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "SCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Standard",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "41.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "111.32",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "IFAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Intermediate",
+        "type" : "SUV"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "66.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "174.01",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "SFAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Standard",
+        "type" : "SUV"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "67.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "174.04",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "PCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Premium",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "68.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "176.54",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "STAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Standard",
+        "type" : "Convertible"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "96.20",
+          "currency" : "USD"
+        }
+      }, {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "96.20",
+          "currency" : "EUR"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "196.26",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "MVAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Mini",
+        "type" : "Passenger van"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "78.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "201.62",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "RFAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Standard Elite",
+        "type" : "SUV"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "83.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "214.17",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "FVAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Fullsize",
+        "type" : "Passenger van"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "105.40",
+          "currency" : "USD"
+        }
+      }, {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "105.40",
+          "currency" : "EUR"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "214.66",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "FFAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Fullsize",
+        "type" : "SUV"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "93.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "239.24",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "PFAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Premium",
+        "type" : "SUV"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "121.60",
+          "currency" : "USD"
+        }
+      }, {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "121.60",
+          "currency" : "EUR"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "247.06",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "LCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Luxury",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "98.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "251.78",
+        "currency" : "USD"
+      }
+    } ]
+  }, {
+    "provider" : {
+      "company_code" : "ZI",
+      "company_name" : "AVIS"
+    },
+    "branch_id" : "IFPT01",
+    "location" : {
+      "latitude" : 35.15,
+      "longitude" : -114.5567
+    },
+    "airport" : "IFP",
+    "address" : {
+      "line1" : "LAUGHLIN/BULLHEAD INT L APO",
+      "city" : "BULLHEAD CITY",
+      "region" : "AZ",
+      "country" : "US"
+    },
+    "cars" : [ {
+      "vehicle_info" : {
+        "acriss_code" : "ECAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Economy",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "48.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "128.87",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "CCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Compact",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "49.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "131.38",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "ICAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Intermediate",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "51.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "136.40",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "FCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Fullsize",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "57.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "151.44",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "SCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Standard",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "57.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "151.44",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "IFAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Intermediate",
+        "type" : "SUV"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "69.99",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "181.54",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "SFAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Standard",
+        "type" : "SUV"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "78.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "201.62",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "PCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Premium",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "80.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "205.14",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "LCAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Luxury",
+        "type" : "2/4 Door"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "108.40",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "216.80",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "RFAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Standard Elite",
+        "type" : "SUV"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "100.00",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "256.79",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "MVAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Mini",
+        "type" : "Passenger van"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "109.80",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "279.87",
+        "currency" : "USD"
+      }
+    }, {
+      "vehicle_info" : {
+        "acriss_code" : "STAR",
+        "transmission" : "Automatic",
+        "fuel" : "Unspecified",
+        "air_conditioning" : true,
+        "category" : "Standard",
+        "type" : "Convertible"
+      },
+      "rates" : [ {
+        "type" : "DAILY",
+        "price" : {
+          "amount" : "119.40",
+          "currency" : "USD"
+        }
+      } ],
+      "estimated_total" : {
+        "amount" : "303.94",
+        "currency" : "USD"
+      }
+    } ]
+  } ]
+}

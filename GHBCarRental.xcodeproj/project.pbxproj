@@ -13,11 +13,13 @@
 		03002557211B55F200A6F574 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002556211B55F200A6F574 /* MapViewController.swift */; };
 		03002559211B561700A6F574 /* MapViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03002558211B561700A6F574 /* MapViewFactory.swift */; };
 		0300255C211B5EEB00A6F574 /* RentalCarAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300255B211B5EEB00A6F574 /* RentalCarAnnotation.swift */; };
+		0300255E211BC77100A6F574 /* RentalSearchRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300255D211BC77100A6F574 /* RentalSearchRequestTests.swift */; };
+		03002562211BD48100A6F574 /* car_rental_geosearch_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 03002561211BD48100A6F574 /* car_rental_geosearch_success.json */; };
+		03002564211BEC6100A6F574 /* car_rental_geosearch_failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 03002563211BEC6000A6F574 /* car_rental_geosearch_failure.json */; };
 		03B091E0211793E300F07463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091DF211793E300F07463 /* AppDelegate.swift */; };
 		03B091E5211793E300F07463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E3211793E300F07463 /* Main.storyboard */; };
 		03B091E7211793E500F07463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E6211793E500F07463 /* Assets.xcassets */; };
 		03B091EA211793E500F07463 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E8211793E500F07463 /* LaunchScreen.storyboard */; };
-		03B091F5211793E500F07463 /* GHBCarRentalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091F4211793E500F07463 /* GHBCarRentalTests.swift */; };
 		03B09200211793E500F07463 /* GHBCarRentalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091FF211793E500F07463 /* GHBCarRentalUITests.swift */; };
 		03B092CF21179A4100F07463 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092CE21179A4100F07463 /* SearchViewController.swift */; };
 		03B092D121179B7000F07463 /* RentalSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B092D021179B7000F07463 /* RentalSearchRequest.swift */; };
@@ -70,6 +72,9 @@
 		03002556211B55F200A6F574 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		03002558211B561700A6F574 /* MapViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewFactory.swift; sourceTree = "<group>"; };
 		0300255B211B5EEB00A6F574 /* RentalCarAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalCarAnnotation.swift; sourceTree = "<group>"; };
+		0300255D211BC77100A6F574 /* RentalSearchRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentalSearchRequestTests.swift; sourceTree = "<group>"; };
+		03002561211BD48100A6F574 /* car_rental_geosearch_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = car_rental_geosearch_success.json; sourceTree = "<group>"; };
+		03002563211BEC6000A6F574 /* car_rental_geosearch_failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = car_rental_geosearch_failure.json; sourceTree = "<group>"; };
 		0301E4BAB03C2F17E7F54723 /* Pods-GHBCarRentalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		03608E954B89AD657E065482 /* Pods-GHBCarRentalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		03B091DC211793E300F07463 /* GHBCarRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHBCarRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,7 +84,6 @@
 		03B091E9211793E500F07463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03B091EB211793E500F07463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03B091F0211793E500F07463 /* GHBCarRentalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GHBCarRentalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		03B091F4211793E500F07463 /* GHBCarRentalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHBCarRentalTests.swift; sourceTree = "<group>"; };
 		03B091F6211793E500F07463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03B091FB211793E500F07463 /* GHBCarRentalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GHBCarRentalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B091FF211793E500F07463 /* GHBCarRentalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHBCarRentalUITests.swift; sourceTree = "<group>"; };
@@ -151,6 +155,15 @@
 			path = "Annotation Views";
 			sourceTree = "<group>";
 		};
+		03002560211BD46A00A6F574 /* JSON Test Data */ = {
+			isa = PBXGroup;
+			children = (
+				03002561211BD48100A6F574 /* car_rental_geosearch_success.json */,
+				03002563211BEC6000A6F574 /* car_rental_geosearch_failure.json */,
+			);
+			path = "JSON Test Data";
+			sourceTree = "<group>";
+		};
 		03B091D3211793E300F07463 = {
 			isa = PBXGroup;
 			children = (
@@ -192,10 +205,11 @@
 		03B091F3211793E500F07463 /* GHBCarRentalTests */ = {
 			isa = PBXGroup;
 			children = (
+				03002560211BD46A00A6F574 /* JSON Test Data */,
+				0300255D211BC77100A6F574 /* RentalSearchRequestTests.swift */,
 				03B092EA2118363200F07463 /* RentalProviderTests.swift */,
 				03B092E62117EA0900F07463 /* UnitConversionsTests.swift */,
 				03B092E82117ED2B00F07463 /* DateFormatterTests.swift */,
-				03B091F4211793E500F07463 /* GHBCarRentalTests.swift */,
 				03B092EE2118AB3900F07463 /* AcrissCategoryDecoderTests.swift */,
 				0300254E211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift */,
 				03B091F6211793E500F07463 /* Info.plist */,
@@ -457,6 +471,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03002562211BD48100A6F574 /* car_rental_geosearch_success.json in Resources */,
+				03002564211BEC6100A6F574 /* car_rental_geosearch_failure.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,9 +555,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GHBCarRentalTests/Pods-GHBCarRentalTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -672,9 +691,9 @@
 				0300254F211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift in Sources */,
 				03B092EB2118363200F07463 /* RentalProviderTests.swift in Sources */,
 				03B092E72117EA0900F07463 /* UnitConversionsTests.swift in Sources */,
+				0300255E211BC77100A6F574 /* RentalSearchRequestTests.swift in Sources */,
 				03B092EF2118AB3900F07463 /* AcrissCategoryDecoderTests.swift in Sources */,
 				03B092E92117ED2B00F07463 /* DateFormatterTests.swift in Sources */,
-				03B091F5211793E500F07463 /* GHBCarRentalTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

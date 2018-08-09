@@ -137,11 +137,6 @@ extension AcrissDecoder {
     
     private func representativeImageFor(vehicleCategory: VehicleCategory) -> UIImage
     {
-        
-        // TODO: USING THIS FOR NOW
-        return UIImage(named: "acriss-img-unknown")!
-        
-        /*
         switch vehicleCategory {
             
         case .unknown:
@@ -170,7 +165,7 @@ extension AcrissDecoder {
             
         default:
             return UIImage(named: "acriss-img-unknown")!
-        }*/
+        }
     }
     
     private func vehicleTypeDescriptionFor(letter: String) -> String?
