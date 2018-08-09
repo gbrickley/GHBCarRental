@@ -1,0 +1,6 @@
+framework module Pods_GHBCarRentalUITests {
+  umbrella header "Pods-GHBCarRentalUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

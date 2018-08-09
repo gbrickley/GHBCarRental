@@ -1,0 +1,6 @@
+framework module Pods_GHBCarRental {
+  umbrella header "Pods-GHBCarRental-umbrella.h"
+
+  export *
+  module * { export * }
+}
