@@ -183,7 +183,7 @@
 				03B0920E211793F700F07463 /* View */,
 				03B0920F211793FB00F07463 /* Controller */,
 				03B092112117943900F07463 /* Assets */,
-				03B092102117942700F07463 /* Utilities */,
+				03B092102117942700F07463 /* Extensions */,
 				03B092D62117B18900F07463 /* Amadeus API */,
 			);
 			path = GHBCarRental;
@@ -243,7 +243,7 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		03B092102117942700F07463 /* Utilities */ = {
+		03B092102117942700F07463 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				03B092F22118EFA100F07463 /* UIView+GHBCarRental.swift */,
@@ -252,7 +252,7 @@
 				03B092FD2119384A00F07463 /* DateInterval+GHBCarRental.swift */,
 				03B092FF21193EC900F07463 /* Date+GHBCarRental.swift */,
 			);
-			path = Utilities;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		03B092112117943900F07463 /* Assets */ = {

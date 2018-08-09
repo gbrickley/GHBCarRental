@@ -48,5 +48,4 @@ class UnitConversionsTests: XCTestCase {
         let expectedMiles: Double = 0.0621371
         XCTAssertEqual(calculatedMiles, expectedMiles, accuracy: 0.001)
     }
-
 }

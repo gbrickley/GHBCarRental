@@ -438,7 +438,6 @@ private extension SearchViewController {
     {
         showLoadingViewWithMesage("Updating location...")
         UserLocationManager.sharedInstance.fetchUsersCurrentLocation(completion: { placemark, error in
-            print("Did retrieve users location.")
             self.hideLoadingView()
             if let placemark = placemark {
                 self.updateSearchCenterToPlacemark(placemark)
@@ -583,20 +582,12 @@ extension SearchViewController: AirbnbDatePickerViewControllerDelegate {
     {
         if let interval = dateInterval {
             
-            print("[Date]: Initial pickup: \(interval.start)")
-            
-            // TODO: Set property time values here
+            // Set the time components of the dates
             let pickup = interval.start.dateWithUpdatedTime(hour: DefaultDates.defaultPickupTimeHours, min: DefaultDates.defaultPickupTimeMinutes)
-            print("[Date]: Updated pickup: \(pickup)")
-            
-            print("[Date]: Initial dropoff: \(interval.end)")
+
             let dropoff = interval.end.dateWithUpdatedTime(hour: DefaultDates.defaultDropoffTimeHours, min: DefaultDates.defaultDropoffTimeMinutes)
-            print("[Date]: Updated dropoff: \(dropoff)")
             
             updateDateRangeWith(pickup: pickup, and: dropoff)
-            
-            //let date = Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!
-            //updateDateRangeWithInterval(interval)
         }
     }
 }

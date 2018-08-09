@@ -10,7 +10,7 @@ import Foundation
 
 extension Date {
     
-    /// The date, as a date string in the form ''
+    /// The date, as a date string in the form 'yyyy-MM-dd'T'HH:mm:ss'
     func amadeusAPIFormattedDateTimeString() -> String
     {
         let formatter = DateFormatter()

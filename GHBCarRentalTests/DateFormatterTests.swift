@@ -25,15 +25,18 @@ class DateFormatterTests: XCTestCase {
     func testAmadeusAPIDateStringFormat()
     {
         // If:
-        date = Date(timeIntervalSince1970: 1533523802)
+        let testDate = Date(timeIntervalSince1970: 1533523802)
         
         // When:
-        let calculatedString = date.amadeusAPIFormattedDateTimeString()
+        let calculatedString = testDate.amadeusAPIFormattedDateTimeString()
         
         // Then:
+        let pattern = "(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2})\\:(\\d{2})\\:(\\d{2})"
+        let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
 
-        let expectedString = "2018-08-06T02:50:02"
-        XCTAssertEqual(calculatedString, expectedString, "Date not properly converted to Amadeus API date string format")
+        let matches = regex.matches(in: calculatedString, options: [], range: NSRange(location: 0, length: calculatedString.count))
+
+        let isValid = matches.count == 1 && matches[0].range.location == 0 && matches[0].range.length == calculatedString.count
+        XCTAssert(isValid, "Date not properly formatted")
     }
-
 }
