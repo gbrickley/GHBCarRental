@@ -8,7 +8,7 @@ jobs:
 
     # Specify the Xcode version to use
     macos:
-      xcode: "8.3.3"
+      xcode: "9.3.1"
 
     steps:
       - checkout
@@ -20,7 +20,7 @@ jobs:
 
       # Build the app and run tests
       - run:
-          name: Build and run tests
+          name: Build and Run Unit Tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 6
