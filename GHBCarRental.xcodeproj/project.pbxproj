@@ -16,6 +16,9 @@
 		0300255E211BC77100A6F574 /* RentalSearchRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0300255D211BC77100A6F574 /* RentalSearchRequestTests.swift */; };
 		03002562211BD48100A6F574 /* car_rental_geosearch_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 03002561211BD48100A6F574 /* car_rental_geosearch_success.json */; };
 		03002564211BEC6100A6F574 /* car_rental_geosearch_failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 03002563211BEC6000A6F574 /* car_rental_geosearch_failure.json */; };
+		038EF6DE211E47F000DA87AB /* BeaconTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038EF6DD211E47F000DA87AB /* BeaconTracker.swift */; };
+		038EF6E0211E544800DA87AB /* CollatzConjecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038EF6DF211E544800DA87AB /* CollatzConjecture.swift */; };
+		038EF6E2211EB7D400DA87AB /* CollatzConjectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038EF6E1211EB7D400DA87AB /* CollatzConjectureTests.swift */; };
 		03B091E0211793E300F07463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B091DF211793E300F07463 /* AppDelegate.swift */; };
 		03B091E5211793E300F07463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E3211793E300F07463 /* Main.storyboard */; };
 		03B091E7211793E500F07463 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03B091E6211793E500F07463 /* Assets.xcassets */; };
@@ -77,6 +80,9 @@
 		03002563211BEC6000A6F574 /* car_rental_geosearch_failure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = car_rental_geosearch_failure.json; sourceTree = "<group>"; };
 		0301E4BAB03C2F17E7F54723 /* Pods-GHBCarRentalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		03608E954B89AD657E065482 /* Pods-GHBCarRentalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHBCarRentalUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHBCarRentalUITests/Pods-GHBCarRentalUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		038EF6DD211E47F000DA87AB /* BeaconTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconTracker.swift; sourceTree = "<group>"; };
+		038EF6DF211E544800DA87AB /* CollatzConjecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollatzConjecture.swift; sourceTree = "<group>"; };
+		038EF6E1211EB7D400DA87AB /* CollatzConjectureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollatzConjectureTests.swift; sourceTree = "<group>"; };
 		03B091DC211793E300F07463 /* GHBCarRental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHBCarRental.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B091DF211793E300F07463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03B091E4211793E300F07463 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -206,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				03002560211BD46A00A6F574 /* JSON Test Data */,
+				038EF6E1211EB7D400DA87AB /* CollatzConjectureTests.swift */,
 				0300255D211BC77100A6F574 /* RentalSearchRequestTests.swift */,
 				03B092EA2118363200F07463 /* RentalProviderTests.swift */,
 				03B092E62117EA0900F07463 /* UnitConversionsTests.swift */,
@@ -229,9 +236,11 @@
 		03B0920D211793EF00F07463 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				038EF6DD211E47F000DA87AB /* BeaconTracker.swift */,
 				03B092F9211908CE00F07463 /* UserLocationManager.swift */,
 				03002553211A674400A6F574 /* RentailOptionDetailViewFactory.swift */,
 				03002558211B561700A6F574 /* MapViewFactory.swift */,
+				038EF6DF211E544800DA87AB /* CollatzConjecture.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -664,6 +673,7 @@
 				03B092F82118F1DF00F07463 /* UITableView+GHBCarRental.swift in Sources */,
 				03B092CF21179A4100F07463 /* SearchViewController.swift in Sources */,
 				03B092DE2117C11200F07463 /* CarRentalGeosearch.swift in Sources */,
+				038EF6DE211E47F000DA87AB /* BeaconTracker.swift in Sources */,
 				03B092F12118D6B400F07463 /* Double+Amadeus.swift in Sources */,
 				03002559211B561700A6F574 /* MapViewFactory.swift in Sources */,
 				03B0930021193EC900F07463 /* Date+GHBCarRental.swift in Sources */,
@@ -675,6 +685,7 @@
 				03B092FE2119384A00F07463 /* DateInterval+GHBCarRental.swift in Sources */,
 				03B092FC211910A800F07463 /* CLPlacemark+GHBCarRental.swift in Sources */,
 				03B092E22117E3AB00F07463 /* UnitConversions.swift in Sources */,
+				038EF6E0211E544800DA87AB /* CollatzConjecture.swift in Sources */,
 				03002552211A63FD00A6F574 /* RentalOptionDetailViewController.swift in Sources */,
 				03B091E0211793E300F07463 /* AppDelegate.swift in Sources */,
 				03B092F32118EFA100F07463 /* UIView+GHBCarRental.swift in Sources */,
@@ -689,6 +700,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0300254F211A2D5A00A6F574 /* AcrissVehicleTypeDecoderTests.swift in Sources */,
+				038EF6E2211EB7D400DA87AB /* CollatzConjectureTests.swift in Sources */,
 				03B092EB2118363200F07463 /* RentalProviderTests.swift in Sources */,
 				03B092E72117EA0900F07463 /* UnitConversionsTests.swift in Sources */,
 				0300255E211BC77100A6F574 /* RentalSearchRequestTests.swift in Sources */,

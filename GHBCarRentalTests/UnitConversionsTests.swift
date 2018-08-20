@@ -22,7 +22,7 @@ class UnitConversionsTests: XCTestCase {
         unitConverter = nil
         super.tearDown()
     }
-    
+
     func testMilesToKilometerConversion()
     {
         // If:
